@@ -1,0 +1,54 @@
+                         ┌─────────────────┐
+                         │      User       │
+                         ├─────────────────┤
+                         │ userId          │
+                         │ name            │
+                         │ latitude        │
+                         │ longitude       │
+                         │ available       │
+                         │ helpTypes       │
+                         └────────┬────────┘
+                                  │
+                                  │ creates
+                                  ▼
+                         ┌─────────────────┐
+                         │   SOSRequest    │
+                         ├─────────────────┤
+                         │ requestId       │
+                         │ requester       │
+                         │ helpType        │
+                         │ latitude        │
+                         │ longitude       │
+                         │ radiusKm        │
+                         │ status          │
+                         └────────┬────────┘
+                                  │
+                                  │ matched with
+                                  ▼
+                         ┌─────────────────┐
+                         │     Helper      │
+                         ├─────────────────┤
+                         │ user            │
+                         │ distanceKm      │
+                         └─────────────────┘
+
+
+        ┌─────────────────┐
+        │    HelpType     │
+        ├─────────────────┤
+        │ CAR_TROUBLE     │
+        │ JUMP_START      │
+        │ REPAIR          │
+        │ HOME_HELP       │
+        │ OTHER           │
+        └─────────────────┘
+
+
+        ┌─────────────────┐
+        │ RequestStatus   │
+        ├─────────────────┤
+        │ OPEN            │
+        │ ACCEPTED        │
+        │ COMPLETED       │
+        │ CANCELLED       │
+        └─────────────────┘
