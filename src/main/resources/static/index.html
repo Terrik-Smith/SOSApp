@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SOS Help | Nearby Assistance</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f6f8fb;
+            color: #172033;
+        }
+
+        /* ---------- NAVBAR ---------- */
+
+        nav {
+            height: 72px;
+            background: white;
+            border-bottom: 1px solid #e8ebf0;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            background: #d62828;
+            color: white;
+
+            width: 38px;
+            height: 38px;
+
+            border-radius: 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #555;
+            margin-left: 30px;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: #d62828;
+        }
+
+        .profile-button {
+            border: 1px solid #ddd;
+            background: white;
+            padding: 9px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* ---------- HERO ---------- */
+
+        .hero {
+            max-width: 1100px;
+            margin: auto;
+
+            padding: 70px 25px 50px;
+
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 span {
+            color: #d62828;
+        }
+
+        .hero p {
+            max-width: 600px;
+            margin: auto;
+
+            color: #666;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        /* ---------- LOCATION ---------- */
+
+        .location {
+            margin: 25px auto;
+
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            background: white;
+            border: 1px solid #e4e7ec;
+
+            padding: 10px 18px;
+            border-radius: 30px;
+
+            font-size: 14px;
+        }
+
+        /* ---------- SOS ---------- */
+
+        .sos-container {
+            display: flex;
+            justify-content: center;
+
+            margin: 25px 0 70px;
+        }
+
+        .sos-button {
+            width: 210px;
+            height: 210px;
+
+            border-radius: 50%;
+
+            border: 12px solid #f8dada;
+
+            background: #d62828;
+
+            color: white;
+
+            font-size: 23px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 15px 35px rgba(214, 40, 40, .25);
+
+            transition: all .2s ease;
+        }
+
+        .sos-button:hover {
+            transform: scale(1.04);
+
+            box-shadow:
+                0 20px 45px rgba(214, 40, 40, .35);
+        }
+
+        .sos-button:active {
+            transform: scale(.97);
+        }
+
+        /* ---------- SECTION ---------- */
+
+        .section {
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 0 25px 70px;
+        }
+
+        .section-header {
+            margin-bottom: 25px;
+        }
+
+        .section-header h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .section-header p {
+            color: #777;
+        }
+
+        /* ---------- HELP CARDS ---------- */
+
+        .help-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(190px, 1fr));
+
+            gap: 18px;
+        }
+
+        .help-card {
+            background: white;
+
+            border: 1px solid #e6e9ee;
+
+            border-radius: 14px;
+
+            padding: 25px;
+
+            cursor: pointer;
+
+            transition: all .2s ease;
+        }
+
+        .help-card:hover {
+            transform: translateY(-4px);
+
+            border-color: #d62828;
+
+            box-shadow:
+                0 10px 25px rgba(0,0,0,.06);
+        }
+
+        .help-icon {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .help-card h3 {
+            margin-bottom: 7px;
+        }
+
+        .help-card p {
+            color: #777;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* ---------- STATUS ---------- */
+
+        .status-card {
+            margin-top: 35px;
+
+            background: #172033;
+
+            color: white;
+
+            border-radius: 16px;
+
+            padding: 25px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+        }
+
+        .status-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+
+            background: #35c759;
+
+            border-radius: 50%;
+        }
+
+        .status-card p {
+            color: #b9bfca;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        /* ---------- HOW IT WORKS ---------- */
+
+        .steps {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 25px;
+
+            margin-top: 25px;
+        }
+
+        .step {
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 14px;
+
+            border: 1px solid #e6e9ee;
+        }
+
+        .step-number {
+            width: 35px;
+            height: 35px;
+
+            border-radius: 50%;
+
+            background: #fce4e4;
+
+            color: #d62828;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: bold;
+
+            margin-bottom: 15px;
+        }
+
+        .step p {
+            color: #777;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+            margin-top: 8px;
+        }
+
+        /* ---------- MESSAGE ---------- */
+
+        .message {
+            text-align: center;
+
+            min-height: 25px;
+
+            margin: 25px;
+
+            font-weight: bold;
+        }
+
+        /* ---------- FOOTER ---------- */
+
+        footer {
+            background: #172033;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 35px 20px;
+        }
+
+        footer p {
+            color: #aeb5c2;
+
+            font-size: 13px;
+
+            margin-top: 8px;
+        }
+
+        /* ---------- MOBILE ---------- */
+
+        @media (max-width: 700px) {
+
+            nav {
+                padding: 0 20px;
+            }
+
+            nav .links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+
+<nav>
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            🆘
+        </div>
+
+        SOS Help
+
+    </div>
+
+    <div class="links">
+
+        <a href="#">Home</a>
+
+        <a href="#help">Get Help</a>
+
+        <a href="#how">How It Works</a>
+
+        <button class="profile-button">
+            👤 Profile
+        </button>
+
+    </div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <h1>
+        Help is closer than you <span>think.</span>
+    </h1>
+
+    <p>
+        SOS Help connects people who need assistance
+        with nearby users who are ready and willing to help.
+    </p>
+
+    <div class="location">
+        📍 Location services active
+    </div>
+
+</section>
+
+
+<!-- SOS BUTTON -->
+
+<div class="sos-container">
+
+    <button class="sos-button" onclick="sendSOS()">
+
+        🆘
+
+        <br>
+
+        SEND SOS
+
+    </button>
+
+</div>
+
+
+<!-- HELP OPTIONS -->
+
+<section class="section" id="help">
+
+    <div class="section-header">
+
+        <h2>
+            What do you need help with?
+        </h2>
+
+        <p>
+            Select an option and we'll look for nearby helpers.
+        </p>
+
+    </div>
+
+
+    <div class="help-grid">
+
+        <div class="help-card"
+             onclick="selectHelp('Car Trouble')">
+
+            <div class="help-icon">
+                🚗
+            </div>
+
+            <h3>
+                Car Trouble
+            </h3>
+
+            <p>
+                Breakdown, flat tire, or other vehicle problems.
+            </p>
+
+        </div>
+
+
+        <div class="help-card"
+             onclick="selectHelp('Jump Start')">
+
+            <div class="help-icon">
+                🪫
+            </div>
+
+            <h3>
+                Jump Start
+            </h3>
+
+            <p>
+                Need help getting your vehicle started?
+            </p>
+
+        </div>
+
+
+        <div class="help-card"
+             onclick="selectHelp('Repair')">
+
+            <div class="help-icon">
+                🔧
+            </div>
+
+            <h3>
+                Repair
+            </h3>
+
+            <p>
+                Looking for someone with tools or repair skills?
+            </p>
+
+        </div>
+
+
+        <div class="help-card"
+             onclick="selectHelp('Home Help')">
+
+            <div class="help-icon">
+                🏠
+            </div>
+
+            <h3>
+                Home Help
+            </h3>
+
+            <p>
+                Need assistance with something around your home?
+            </p>
+
+        </div>
+
+
+        <div class="help-card"
+             onclick="selectHelp('Other')">
+
+            <div class="help-icon">
+                📦
+            </div>
+
+            <h3>
+                Other
+            </h3>
+
+            <p>
+                Something else? Send a general help request.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- STATUS -->
+
+    <div class="status-card">
+
+        <div class="status-left">
+
+            <div class="status-dot"></div>
+
+            <div>
+
+                <strong>
+                    You're currently safe
+                </strong>
+
+                <p>
+                    No active SOS requests
+                </p>
+
+            </div>
+
+        </div>
+
+        <div>
+            🛡️
+        </div>
+
+    </div>
+
+
+    <div class="message" id="message">
+        Select a help option to get started.
+    </div>
+
+</section>
+
+
+<!-- HOW IT WORKS -->
+
+<section class="section" id="how">
+
+    <div class="section-header">
+
+        <h2>
+            How SOS Help Works
+        </h2>
+
+        <p>
+            Getting assistance takes just a few steps.
+        </p>
+
+    </div>
+
+
+    <div class="steps">
+
+        <div class="step">
+
+            <div class="step-number">
+                1
+            </div>
+
+            <h3>
+                Send an SOS
+            </h3>
+
+            <p>
+                Tell us what kind of assistance you need
+                and share your location.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                2
+            </div>
+
+            <h3>
+                Find Nearby Help
+            </h3>
+
+            <p>
+                SOS Help searches for available users
+                within your selected area.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                3
+            </div>
+
+            <h3>
+                Connect
+            </h3>
+
+            <p>
+                A nearby helper accepts your request
+                and you connect to resolve the situation.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <strong>
+        🆘 SOS Help
+    </strong>
+
+    <p>
+        Connecting people when they need help most.
+    </p>
+
+</footer>
+
+
+<script>
+
+    let selectedHelp = "";
+
+    function selectHelp(type) {
+
+        selectedHelp = type;
+
+        document.getElementById("message").innerText =
+            "Selected: " + type +
+            " — Press SEND SOS when you're ready.";
+
+        window.scrollTo({
+            top: 250,
+            behavior: "smooth"
+        });
+    }
+
+
+    function sendSOS() {
+
+        if (selectedHelp === "") {
+
+            selectedHelp = "General Help";
+
+        }
+
+        document.getElementById("message").innerText =
+            "🔴 SOS sent! Searching for nearby helpers...";
+    }
+
+</script>
+
+
+</body>
+</html>
