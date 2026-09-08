@@ -1,0 +1,1712 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SOS Connect | Request Help</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #06182a;
+            --navy-light: #0b243c;
+            --red: #ed2635;
+            --red-dark: #d91f2d;
+            --red-light: #ffe9eb;
+            --white: #ffffff;
+            --off-white: #f5f7fa;
+            --text: #0b1b2d;
+            --gray: #65758b;
+            --border: #dfe5ec;
+            --green: #22c77a;
+            --green-light: #e5f8ef;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--off-white);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* NAVIGATION */
+
+        .navbar {
+            height: 82px;
+            background: var(--navy);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .brand-logo {
+            width: 52px;
+            height: 52px;
+            object-fit: contain;
+        }
+
+        .brand-text {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .brand-text span {
+            color: var(--red);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #d9e1e9;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: white;
+        }
+
+        .nav-links a.active {
+            border-bottom: 3px solid var(--red);
+            padding-bottom: 8px;
+        }
+
+        .profile-button {
+            background: transparent;
+            color: white;
+            border: 1px solid #617083;
+            border-radius: 8px;
+            padding: 9px 16px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* PAGE HEADER */
+
+        .page-header {
+            background: var(--navy);
+            color: white;
+            text-align: center;
+            padding: 48px 20px 58px;
+        }
+
+        .page-header h1 {
+            font-size: clamp(34px, 5vw, 52px);
+            margin-bottom: 12px;
+        }
+
+        .page-header h1 span {
+            color: var(--red);
+        }
+
+        .page-header p {
+            color: #c5d0db;
+            font-size: 14px;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        /* PROGRESS */
+
+        .progress-wrap {
+            max-width: 900px;
+            margin: -22px auto 0;
+            padding: 0 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .progress {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            box-shadow: 0 10px 28px rgba(6,24,42,.08);
+            padding: 18px 25px;
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+        }
+
+        .progress-step {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            color: #9aa6b3;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .progress-step.active {
+            color: var(--navy);
+        }
+
+        .progress-number {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #e9edf2;
+            color: #65758b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+        }
+
+        .progress-step.active .progress-number {
+            background: var(--red);
+            color: white;
+        }
+
+        /* FORM */
+
+        .form-section {
+            max-width: 900px;
+            margin: auto;
+            padding: 45px 25px 70px;
+        }
+
+        .form-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(6,24,42,.05);
+            padding: 32px;
+            margin-bottom: 20px;
+        }
+
+        .form-card h2 {
+            font-size: 21px;
+            margin-bottom: 7px;
+        }
+
+        .form-card > p {
+            color: var(--gray);
+            font-size: 12px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .required {
+            color: var(--red);
+        }
+
+        /* CATEGORY */
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .category-option input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .category-option label {
+            display: block;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 17px;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .category-option label:hover {
+            border-color: #e99ba2;
+            transform: translateY(-1px);
+        }
+
+        .category-option input:checked + label {
+            border: 2px solid var(--red);
+            background: var(--red-light);
+            padding: 16px;
+        }
+
+        .category-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .category-description {
+            color: var(--gray);
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+        /* SERVICES */
+
+        .service-section {
+            display: none;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid var(--border);
+        }
+
+        .service-section.visible {
+            display: block;
+        }
+
+        .service-section h3 {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .service-section > p {
+            color: var(--gray);
+            font-size: 11px;
+            margin-bottom: 15px;
+        }
+
+        .service-group {
+            margin-bottom: 18px;
+        }
+
+        .service-group-title {
+            font-size: 11px;
+            font-weight: 800;
+            margin-bottom: 9px;
+        }
+
+        .service-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .service-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #fafbfd;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .service-option input {
+            accent-color: var(--red);
+        }
+
+        /* INPUTS */
+
+        .field-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .field {
+            margin-bottom: 18px;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        .field label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 7px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            font-family: inherit;
+            font-size: 12px;
+            outline: none;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: var(--red);
+            box-shadow: 0 0 0 3px rgba(237,38,53,.08);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .hint {
+            color: var(--gray);
+            font-size: 10px;
+            margin-top: 5px;
+            line-height: 1.5;
+        }
+
+        /* LOCATION */
+
+        .location-box {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 11px;
+            padding: 18px;
+        }
+
+        .location-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .location-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #aab5c0;
+        }
+
+        .location-dot.success {
+            background: var(--green);
+        }
+
+        .location-status strong {
+            font-size: 12px;
+        }
+
+        .location-status p {
+            color: var(--gray);
+            font-size: 10px;
+            margin-top: 3px;
+        }
+
+        .location-button {
+            background: var(--navy);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 11px 16px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .location-button:hover {
+            background: var(--navy-light);
+        }
+
+        .location-details {
+            display: none;
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
+            color: var(--gray);
+            font-size: 10px;
+        }
+
+        .location-details.visible {
+            display: block;
+        }
+
+        .radius-row {
+            margin-top: 18px;
+        }
+
+        .radius-row label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .radius-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        input[type="range"] {
+            flex: 1;
+            accent-color: var(--red);
+        }
+
+        .radius-value {
+            min-width: 65px;
+            text-align: center;
+            background: var(--red-light);
+            color: var(--red);
+            border-radius: 7px;
+            padding: 8px;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        /* SAFETY */
+
+        .safety-note {
+            display: flex;
+            gap: 12px;
+            background: #fff8e8;
+            border: 1px solid #f0dfb3;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .safety-icon {
+            color: #a06a00;
+            font-weight: 800;
+        }
+
+        .safety-note h3 {
+            font-size: 11px;
+            margin-bottom: 4px;
+        }
+
+        .safety-note p {
+            color: #7a6847;
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+        /* SUBMIT */
+
+        .submit-button {
+            width: 100%;
+            background: var(--red);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 16px;
+            font-size: 13px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            background: var(--red-dark);
+        }
+
+        .submit-help {
+            color: var(--gray);
+            font-size: 10px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .success-message {
+            display: none;
+            background: var(--green-light);
+            border: 1px solid #a9e6c9;
+            color: #176d49;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 18px;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .success-message.visible {
+            display: block;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: var(--navy);
+            color: white;
+            padding: 28px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        footer strong {
+            font-size: 15px;
+        }
+
+        footer strong span {
+            color: var(--red);
+        }
+
+        footer p {
+            color: #8e9cab;
+            font-size: 10px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .category-grid,
+            .service-options,
+            .field-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .progress {
+                gap: 12px;
+                justify-content: space-between;
+            }
+
+            .progress-step {
+                font-size: 0;
+            }
+
+            .progress-step .progress-number {
+                font-size: 11px;
+            }
+
+            .form-card {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .brand-text {
+                font-size: 18px;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+
+    </style>
+
+<style>
+/* SOS CONNECT BRAND LAYER */
+:root {
+  --sos-navy: #06182A;
+  --sos-navy-light: #0D2943;
+  --sos-red: #D91F2D;
+  --sos-red-light: #FFE9EB;
+  --sos-white: #FFFFFF;
+  --sos-gray: #F5F7F9;
+  --sos-text: #17212B;
+}
+
+body {
+  background: var(--sos-gray);
+  color: var(--sos-text);
+}
+
+header {
+  background: var(--sos-navy) !important;
+  color: var(--sos-white) !important;
+  border-color: var(--sos-navy) !important;
+}
+
+header a,
+header nav a,
+header .brand,
+header .brand-name {
+  color: var(--sos-white) !important;
+}
+
+footer {
+  background: var(--sos-navy) !important;
+  color: var(--sos-white) !important;
+}
+
+footer a {
+  color: var(--sos-white) !important;
+}
+
+button,
+.btn,
+.primary-button,
+.cta-button,
+.connect-button,
+.connector-button {
+  background: var(--sos-red) !important;
+  border-color: var(--sos-red) !important;
+  color: var(--sos-white) !important;
+}
+
+button:hover,
+.btn:hover,
+.primary-button:hover,
+.cta-button:hover,
+.connect-button:hover,
+.connector-button:hover {
+  background: #C81C29 !important;
+}
+
+.badge,
+.eyebrow,
+.section-eyebrow {
+  color: var(--sos-red) !important;
+}
+
+a {
+  color: var(--sos-navy);
+}
+
+.card,
+.panel,
+.section-card {
+  background: var(--sos-white);
+}
+
+:focus-visible {
+  outline: 3px solid var(--sos-red) !important;
+  outline-offset: 3px;
+}
+</style>
+
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <header class="navbar">
+
+        <a href="/" class="brand">
+
+            <!-- YOUR EXISTING SOS CONNECT LOGO -->
+            <img
+                src="/images/sos-connect-logo.png"
+                alt="SOS Connect Logo"
+                class="brand-logo"
+            >
+
+            <div class="brand-text">
+                SOS <span>CONNECT</span>
+            </div>
+
+        </a>
+
+        <nav class="nav-links">
+
+            <a href="/">Home</a>
+
+            <a href="/request-help.html" class="active">
+                Get Help
+            </a>
+
+            <a href="/#nearby">
+                Nearby
+            </a>
+
+            <a href="/#how">
+                How It Works
+            </a>
+
+            <button
+                class="profile-button"
+                onclick="profileMessage()"
+            >
+                Profile
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <!-- PAGE HEADER -->
+
+    <section class="page-header">
+
+        <h1>
+            Request <span>Help</span>
+        </h1>
+
+        <p>
+            Tell us what you need and we'll look for
+            Connectors who may be able to help nearby.
+        </p>
+
+    </section>
+
+
+    <!-- PROGRESS -->
+
+    <div class="progress-wrap">
+
+        <div class="progress">
+
+            <div class="progress-step active">
+                <div class="progress-number">01</div>
+                Tell Us What You Need
+            </div>
+
+            <div class="progress-step">
+                <div class="progress-number">02</div>
+                Find a Connector
+            </div>
+
+            <div class="progress-step">
+                <div class="progress-number">03</div>
+                Connect & Get Help
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- FORM -->
+
+    <main class="form-section">
+
+        <form id="helpForm">
+
+
+            <!-- CATEGORY -->
+
+            <section class="form-card">
+
+                <h2>
+                    What do you need help with?
+                </h2>
+
+                <p>
+                    Choose the category that best matches
+                    your request.
+                </p>
+
+                <div class="category-grid">
+
+
+                    <div class="category-option">
+
+                        <input
+                            type="radio"
+                            name="category"
+                            id="vehicle"
+                            value="Vehicle Assistance"
+                            required
+                            onchange="showServices('vehicleServices')"
+                        >
+
+                        <label for="vehicle">
+
+                            <div class="category-title">
+                                Vehicle Assistance
+                            </div>
+
+                            <div class="category-description">
+                                Jump starts, flat tires,
+                                lockouts and vehicle trouble.
+                            </div>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="category-option">
+
+                        <input
+                            type="radio"
+                            name="category"
+                            id="home"
+                            value="Home & Yard"
+                            onchange="showServices('homeServices')"
+                        >
+
+                        <label for="home">
+
+                            <div class="category-title">
+                                Home & Yard
+                            </div>
+
+                            <div class="category-description">
+                                Yard work, repairs, pet care,
+                                furniture and tech help.
+                            </div>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="category-option">
+
+                        <input
+                            type="radio"
+                            name="category"
+                            id="transportation"
+                            value="Transportation"
+                            onchange="showServices('transportServices')"
+                        >
+
+                        <label for="transportation">
+
+                            <div class="category-title">
+                                Transportation
+                            </div>
+
+                            <div class="category-description">
+                                Rides, errands, deliveries
+                                and heavy lifting.
+                            </div>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="category-option">
+
+                        <input
+                            type="radio"
+                            name="category"
+                            id="care"
+                            value="Care & Support"
+                            onchange="showServices('careServices')"
+                        >
+
+                        <label for="care">
+
+                            <div class="category-title">
+                                Care & Support
+                            </div>
+
+                            <div class="category-description">
+                                Childcare, elderly support,
+                                meals and welfare checks.
+                            </div>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="category-option">
+
+                        <input
+                            type="radio"
+                            name="category"
+                            id="community"
+                            value="Community Sharing"
+                            onchange="showServices('communityServices')"
+                        >
+
+                        <label for="community">
+
+                            <div class="category-title">
+                                Community Sharing
+                            </div>
+
+                            <div class="category-description">
+                                Share tools, equipment,
+                                food and useful supplies.
+                            </div>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="category-option">
+
+                        <input
+                            type="radio"
+                            name="category"
+                            id="emergency"
+                            value="Emergency & Recovery"
+                            onchange="showServices('emergencyServices')"
+                        >
+
+                        <label for="emergency">
+
+                            <div class="category-title">
+                                Emergency & Recovery
+                            </div>
+
+                            <div class="category-description">
+                                Storm cleanup, outages,
+                                preparation and recovery.
+                            </div>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <!-- VEHICLE -->
+
+                <div id="vehicleServices" class="service-section">
+
+                    <h3>
+                        What kind of vehicle assistance?
+                    </h3>
+
+                    <p>
+                        Choose the option that best describes what you need.
+                    </p>
+
+                    <div class="service-options">
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Jump start">
+                            Jump start
+                        </label>
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Flat tire">
+                            Flat tire
+                        </label>
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Vehicle lockout">
+                            Vehicle lockout
+                        </label>
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Other vehicle trouble">
+                            Other vehicle trouble
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <!-- HOME -->
+
+                <div id="homeServices" class="service-section">
+
+                    <h3>
+                        What kind of home or yard help?
+                    </h3>
+
+                    <p>
+                        Choose the option that best describes what you need.
+                    </p>
+
+                    <div class="service-options">
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Mowing">
+                            Mowing
+                        </label>
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Snow shoveling">
+                            Snow shoveling
+                        </label>
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Leaves">
+                            Leaves
+                        </label>
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Basic gardening">
+                            Basic gardening
+                        </label>
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Dog walking">
+                            Dog walking
+                        </label>
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Pet sitting">
+                            Pet sitting
+                        </label>
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Basic home repair">
+                            Basic home repair
+                        </label>
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Furniture assembly">
+                            Furniture assembly
+                        </label>
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Tech support">
+                            Tech support
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TRANSPORTATION -->
+
+                <div id="transportServices" class="service-section">
+
+                    <h3>
+                        What kind of transportation help?
+                    </h3>
+
+                    <p>
+                        Choose the option that best describes what you need.
+                    </p>
+
+                    <div class="service-options">
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Ride or escort">
+                            Rides & Escorts
+                        </label>
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Errand or delivery">
+                            Errands & Deliveries
+                        </label>
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Heavy lifting">
+                            Heavy Lifting
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CARE -->
+
+                <div id="careServices" class="service-section">
+
+                    <h3>
+                        What kind of care or support?
+                    </h3>
+
+                    <p>
+                        Choose the option that best describes what you need.
+                    </p>
+
+                    <div class="service-options">
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Childcare">
+                            Childcare
+                        </label>
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Elderly support">
+                            Elderly Support
+                        </label>
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Medical support">
+                            Medical Support
+                        </label>
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Meals">
+                            Meals
+                        </label>
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Welfare check">
+                            Welfare Check
+                        </label>
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Skill sharing">
+                            Skill Sharing & Learning
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COMMUNITY -->
+
+                <div id="communityServices" class="service-section">
+
+                    <h3>
+                        What would you like to share or borrow?
+                    </h3>
+
+                    <p>
+                        Choose the option that best describes what you need.
+                    </p>
+
+                    <div class="service-options">
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Item borrowing">
+                            Item Borrowing
+                        </label>
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Food surplus">
+                            Food Surplus
+                        </label>
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Tools and equipment">
+                            Tools & Equipment
+                        </label>
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Useful supplies">
+                            Useful Supplies
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <!-- EMERGENCY -->
+
+                <div id="emergencyServices" class="service-section">
+
+                    <h3>
+                        What kind of emergency or recovery help?
+                    </h3>
+
+                    <p>
+                        Choose the option that best describes what you need.
+                    </p>
+
+                    <div class="service-options">
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Storm cleanup">
+                            Storm Cleanup
+                        </label>
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Disaster preparation">
+                            Disaster Preparation
+                        </label>
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Generator sharing">
+                            Generator Sharing
+                        </label>
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Temporary housing">
+                            Temporary Housing / Storage
+                        </label>
+
+                        <label class="service-option">
+                            <input type="radio" name="service" value="Recovery assistance">
+                            Recovery Assistance
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- DETAILS -->
+
+            <section class="form-card">
+
+                <h2>
+                    Tell us more
+                </h2>
+
+                <p>
+                    Give potential Connectors enough information
+                    to understand what you need.
+                </p>
+
+
+                <div class="field-grid">
+
+                    <div class="field">
+
+                        <label for="name">
+                            Your Name <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Enter your name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label for="email">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Optional"
+                        >
+
+                    </div>
+
+
+                    <div class="field full">
+
+                        <label for="description">
+                            What do you need help with?
+                            <span class="required">*</span>
+                        </label>
+
+                        <textarea
+                            id="description"
+                            name="description"
+                            placeholder="Describe what you need, when you need it, and anything a Connector should know."
+                            required
+                        ></textarea>
+
+                        <div class="hint">
+                            Please do not include passwords,
+                            financial information, or other sensitive information.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- LOCATION -->
+
+            <section class="form-card">
+
+                <h2>
+                    Where do you need help?
+                </h2>
+
+                <p>
+                    You don't need to know your latitude or longitude.
+                    SOS Connect can use your device's current location.
+                </p>
+
+
+                <div class="location-box">
+
+                    <div class="location-status">
+
+                        <div
+                            id="locationDot"
+                            class="location-dot"
+                        ></div>
+
+                        <div>
+
+                            <strong id="locationTitle">
+                                Location not set
+                            </strong>
+
+                            <p id="locationMessage">
+                                Use your current device location
+                                to find nearby Connectors.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="location-button"
+                        onclick="getLocation()"
+                    >
+                        USE MY CURRENT LOCATION
+                    </button>
+
+
+                    <div
+                        id="locationDetails"
+                        class="location-details"
+                    >
+                        Your location has been captured.
+                    </div>
+
+
+                    <div class="radius-row">
+
+                        <label for="radius">
+                            How far should we search?
+                        </label>
+
+                        <div class="radius-controls">
+
+                            <input
+                                type="range"
+                                id="radius"
+                                name="radius"
+                                min="1"
+                                max="50"
+                                value="10"
+                                oninput="updateRadius()"
+                            >
+
+                            <div
+                                class="radius-value"
+                                id="radiusValue"
+                            >
+                                10 miles
+                            </div>
+
+                        </div>
+
+                        <div class="hint">
+                            Search distance is shown in miles.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- SAFETY + SUBMIT -->
+
+            <section class="form-card">
+
+                <div class="safety-note">
+
+                    <div class="safety-icon">
+                        !
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Important Safety Reminder
+                        </h3>
+
+                        <p>
+                            SOS Connect is designed for community assistance
+                            and everyday needs. If you are experiencing a
+                            life-threatening emergency, call 911 first.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="submit-button"
+                >
+                    CONNECT ME WITH A CONNECTOR →
+                </button>
+
+
+                <div class="submit-help">
+                    We'll use your request and location
+                    to look for available Connectors.
+                </div>
+
+
+                <div
+                    id="successMessage"
+                    class="success-message"
+                ></div>
+
+            </section>
+
+        </form>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div>
+
+            <strong>
+                SOS <span>CONNECT</span>
+            </strong>
+
+            <p>
+                Help is closer than you think.
+            </p>
+
+        </div>
+
+        <p>
+            © 2026 SOS Connect
+        </p>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        let userLatitude = null;
+        let userLongitude = null;
+
+
+        function showServices(serviceId) {
+
+            const sections =
+                document.querySelectorAll(".service-section");
+
+            sections.forEach(function(section) {
+
+                section.classList.remove("visible");
+
+            });
+
+
+            const selectedSection =
+                document.getElementById(serviceId);
+
+            if (selectedSection) {
+
+                selectedSection.classList.add("visible");
+
+            }
+
+
+            document
+                .querySelectorAll('input[name="service"]')
+                .forEach(function(input) {
+
+                    input.checked = false;
+
+                });
+
+        }
+
+
+        function updateRadius() {
+
+            const radius =
+                document.getElementById("radius").value;
+
+            document.getElementById("radiusValue").textContent =
+                radius + " miles";
+
+        }
+
+
+        function getLocation() {
+
+            const title =
+                document.getElementById("locationTitle");
+
+            const message =
+                document.getElementById("locationMessage");
+
+            const dot =
+                document.getElementById("locationDot");
+
+            const details =
+                document.getElementById("locationDetails");
+
+
+            if (!navigator.geolocation) {
+
+                title.textContent =
+                    "Location unavailable";
+
+                message.textContent =
+                    "Your browser does not support location services.";
+
+                return;
+
+            }
+
+
+            title.textContent =
+                "Finding your location...";
+
+            message.textContent =
+                "Please allow location access when your browser asks.";
+
+            dot.classList.remove("success");
+
+
+            navigator.geolocation.getCurrentPosition(
+
+                function(position) {
+
+                    userLatitude =
+                        position.coords.latitude;
+
+                    userLongitude =
+                        position.coords.longitude;
+
+
+                    title.textContent =
+                        "Location ready";
+
+                    message.textContent =
+                        "Your current location will be used to find nearby Connectors.";
+
+                    dot.classList.add("success");
+
+
+                    details.textContent =
+                        "Your location has been captured. You do not need to enter latitude or longitude manually.";
+
+                    details.classList.add("visible");
+
+                },
+
+
+                function() {
+
+                    title.textContent =
+                        "Location permission needed";
+
+                    message.textContent =
+                        "Please allow location access and try again.";
+
+                    dot.classList.remove("success");
+
+                }
+
+            );
+
+        }
+
+
+        document
+            .getElementById("helpForm")
+            .addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+
+                const category =
+                    document.querySelector(
+                        'input[name="category"]:checked'
+                    );
+
+
+                const service =
+                    document.querySelector(
+                        'input[name="service"]:checked'
+                    );
+
+
+                if (!category) {
+
+                    alert(
+                        "Please choose a category."
+                    );
+
+                    return;
+
+                }
+
+
+                if (!service) {
+
+                    alert(
+                        "Please choose the type of help you need."
+                    );
+
+                    return;
+
+                }
+
+
+                if (
+                    userLatitude === null ||
+                    userLongitude === null
+                ) {
+
+                    alert(
+                        "Please use your current location before submitting your request."
+                    );
+
+                    return;
+
+                }
+
+
+                const radius =
+                    document.getElementById("radius").value;
+
+
+                const success =
+                    document.getElementById("successMessage");
+
+
+                success.textContent =
+                    "Your " +
+                    category.value +
+                    " request for " +
+                    service.value +
+                    " is ready. We're ready to look for Connectors within " +
+                    radius +
+                    " miles.";
+
+
+                success.classList.add("visible");
+
+            });
+
+
+        function profileMessage() {
+
+            alert(
+                "Profile features are coming soon."
+            );
+
+        }
+
+
+        updateRadius();
+
+    </script>
+
+</body>
+</html>

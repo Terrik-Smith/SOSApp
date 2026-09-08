@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SOS Connect | Your Profile</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        :root {
+            --navy: #06182A;
+            --navy-light: #0D2943;
+            --red: #D91F2D;
+            --red-light: #FFE9EB;
+            --white: #FFFFFF;
+            --gray: #F5F7F9;
+            --text: #17212B;
+            --muted: #66727E;
+            --border: #DCE2E7;
+            --gold: #E6A700;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Public Sans", sans-serif;
+            background: var(--gray);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button,
+        input,
+        textarea {
+            font: inherit;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            background: var(--navy);
+            color: white;
+        }
+
+        .nav {
+            max-width: 1180px;
+            margin: auto;
+            padding: 18px 24px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .logo img {
+            width: 155px;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: #FFD8DC;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        main {
+            max-width: 1050px;
+            margin: auto;
+            padding: 60px 24px 90px;
+        }
+
+        .page-heading {
+            margin-bottom: 35px;
+        }
+
+        .eyebrow {
+            font-family: "IBM Plex Mono", monospace;
+            color: var(--red);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: "Fraunces", serif;
+            color: var(--navy);
+        }
+
+        h1 {
+            font-size: clamp(42px, 7vw, 65px);
+            line-height: 1.05;
+            margin-bottom: 12px;
+        }
+
+        .page-heading p {
+            color: var(--muted);
+            font-size: 17px;
+            max-width: 650px;
+        }
+
+        /* =========================
+           PROFILE HERO
+        ========================= */
+
+        .profile-hero {
+            background: var(--navy);
+            color: white;
+            border-radius: 22px;
+            padding: 40px;
+
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 35px;
+
+            align-items: center;
+
+            margin-bottom: 25px;
+        }
+
+        .profile-photo {
+            width: 170px;
+            height: 170px;
+
+            border-radius: 50%;
+
+            background: var(--navy-light);
+
+            border: 5px solid white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+
+            font-family: "Fraunces", serif;
+            font-size: 48px;
+        }
+
+        .profile-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-info h2 {
+            color: white;
+            font-size: 42px;
+            margin-bottom: 3px;
+        }
+
+        .member-label {
+            color: #B9C5CF;
+            font-size: 14px;
+            margin-bottom: 18px;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stars {
+            color: var(--gold);
+            font-size: 25px;
+            letter-spacing: 2px;
+        }
+
+        .rating-number {
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 14px;
+            color: white;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 35px;
+        }
+
+        .profile-stat strong {
+            display: block;
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 22px;
+            color: white;
+        }
+
+        .profile-stat span {
+            color: #B9C5CF;
+            font-size: 12px;
+        }
+
+        /* =========================
+           CONTENT GRID
+        ========================= */
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 30px;
+
+            box-shadow:
+                0 5px 20px rgba(6, 24, 42, 0.05);
+        }
+
+        .card h2 {
+            font-size: 29px;
+            margin-bottom: 10px;
+        }
+
+        .card-intro {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 22px;
+        }
+
+        /* =========================
+           ABOUT
+        ========================= */
+
+        .about-card {
+            grid-column: 1 / -1;
+        }
+
+        .bio {
+            color: var(--text);
+            font-size: 16px;
+            white-space: pre-wrap;
+        }
+
+        .empty-bio {
+            color: var(--muted);
+            font-style: italic;
+        }
+
+        /* =========================
+           REPUTATION
+        ========================= */
+
+        .reputation-score {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+            padding: 20px;
+
+            background: var(--gray);
+            border-radius: 12px;
+
+            margin-bottom: 20px;
+        }
+
+        .big-rating {
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 40px;
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        .reputation-score .stars {
+            font-size: 22px;
+        }
+
+        .review-count {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .reputation-note {
+            background: var(--red-light);
+            border-left: 4px solid var(--red);
+
+            padding: 16px;
+
+            font-size: 14px;
+        }
+
+        .reputation-note strong {
+            color: var(--navy);
+        }
+
+        /* =========================
+           INFORMATION
+        ========================= */
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+
+            padding: 15px 0;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .info-value {
+            color: var(--navy);
+            font-weight: 600;
+            font-size: 14px;
+            text-align: right;
+        }
+
+        /* =========================
+           EDIT PROFILE
+        ========================= */
+
+        .edit-card {
+            grid-column: 1 / -1;
+        }
+
+        .field {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            color: var(--navy);
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 7px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border: 1px solid var(--border);
+            border-radius: 9px;
+
+            background: white;
+            color: var(--text);
+
+            outline: none;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: var(--red);
+
+            box-shadow:
+                0 0 0 3px var(--red-light);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .two-fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .save-button {
+            width: 100%;
+
+            border: none;
+            border-radius: 9px;
+
+            padding: 15px;
+
+            background: var(--red);
+            color: white;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        .save-button:hover {
+            background: #B91926;
+        }
+
+        .message {
+            display: none;
+
+            margin-top: 15px;
+
+            padding: 12px;
+
+            background: #E8F6EF;
+            color: #16794A;
+
+            border-radius: 8px;
+
+            text-align: center;
+
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: var(--navy);
+            color: white;
+            padding: 35px 24px;
+        }
+
+        .footer-inner {
+            max-width: 1180px;
+            margin: auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 25px;
+        }
+
+        footer p {
+            color: #B9C5CF;
+            font-size: 13px;
+        }
+
+        footer a {
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            .profile-hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .profile-photo {
+                margin: auto;
+            }
+
+            .rating {
+                justify-content: center;
+            }
+
+            .profile-stats {
+                justify-content: center;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-card,
+            .edit-card {
+                grid-column: auto;
+            }
+
+            .nav {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 550px) {
+
+            main {
+                padding: 45px 16px 65px;
+            }
+
+            .profile-hero {
+                padding: 30px 20px;
+            }
+
+            .profile-info h2 {
+                font-size: 34px;
+            }
+
+            .profile-stats {
+                gap: 20px;
+            }
+
+            .two-fields {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+<style>
+/* SOS CONNECT BRAND LAYER */
+:root {
+  --sos-navy: #06182A;
+  --sos-navy-light: #0D2943;
+  --sos-red: #D91F2D;
+  --sos-red-light: #FFE9EB;
+  --sos-white: #FFFFFF;
+  --sos-gray: #F5F7F9;
+  --sos-text: #17212B;
+}
+
+body {
+  background: var(--sos-gray);
+  color: var(--sos-text);
+}
+
+header {
+  background: var(--sos-navy) !important;
+  color: var(--sos-white) !important;
+  border-color: var(--sos-navy) !important;
+}
+
+header a,
+header nav a,
+header .brand,
+header .brand-name {
+  color: var(--sos-white) !important;
+}
+
+footer {
+  background: var(--sos-navy) !important;
+  color: var(--sos-white) !important;
+}
+
+footer a {
+  color: var(--sos-white) !important;
+}
+
+button,
+.btn,
+.primary-button,
+.cta-button,
+.connect-button,
+.connector-button {
+  background: var(--sos-red) !important;
+  border-color: var(--sos-red) !important;
+  color: var(--sos-white) !important;
+}
+
+button:hover,
+.btn:hover,
+.primary-button:hover,
+.cta-button:hover,
+.connect-button:hover,
+.connector-button:hover {
+  background: #C81C29 !important;
+}
+
+.badge,
+.eyebrow,
+.section-eyebrow {
+  color: var(--sos-red) !important;
+}
+
+a {
+  color: var(--sos-navy);
+}
+
+.card,
+.panel,
+.section-card {
+  background: var(--sos-white);
+}
+
+:focus-visible {
+  outline: 3px solid var(--sos-red) !important;
+  outline-offset: 3px;
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <nav class="nav">
+
+        <a
+            class="logo"
+            href="/"
+        >
+            <img
+                src="/images/sos-connect-logo.png"
+                alt="SOS Connect"
+            >
+        </a>
+
+
+        <div class="nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/request-help.html">
+                Get Help
+            </a>
+
+            <a href="/dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="/connector.html">
+                Become a Connector
+            </a>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main>
+
+
+    <!-- PAGE INTRO -->
+
+    <section class="page-heading">
+
+        <div class="eyebrow">
+            SOS CONNECT
+        </div>
+
+        <h1>
+            Your Profile.
+        </h1>
+
+        <p>
+            Get to know the person behind the connection.
+            Your Connector reputation grows through the
+            help you give to others.
+        </p>
+
+    </section>
+
+
+    <!-- =========================
+         PROFILE HERO
+    ========================= -->
+
+    <section class="profile-hero">
+
+
+        <div
+            class="profile-photo"
+            id="profilePhoto"
+        >
+
+            <span id="initials">
+                SC
+            </span>
+
+        </div>
+
+
+        <div class="profile-info">
+
+            <h2 id="profileName">
+                Your Name
+            </h2>
+
+            <p class="member-label">
+                SOS Connect Member
+            </p>
+
+
+            <div class="rating">
+
+                <span
+                    class="stars"
+                    id="stars"
+                >
+                    ☆☆☆☆☆
+                </span>
+
+                <span
+                    class="rating-number"
+                    id="ratingText"
+                >
+                    New Connector
+                </span>
+
+            </div>
+
+
+            <div class="profile-stats">
+
+                <div class="profile-stat">
+
+                    <strong id="connections">
+                        0
+                    </strong>
+
+                    <span>
+                        Completed Connections
+                    </span>
+
+                </div>
+
+
+                <div class="profile-stat">
+
+                    <strong id="reviews">
+                        0
+                    </strong>
+
+                    <span>
+                        Reviews
+                    </span>
+
+                </div>
+
+
+                <div class="profile-stat">
+
+                    <strong id="memberSince">
+                        —
+                    </strong>
+
+                    <span>
+                        Member Since
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CONTENT
+    ========================= -->
+
+    <div class="content-grid">
+
+
+        <!-- ABOUT ME -->
+
+        <section class="card about-card">
+
+            <h2>
+                About Me
+            </h2>
+
+            <p class="card-intro">
+                A little about the person behind this profile.
+            </p>
+
+            <p
+                class="bio"
+                id="bio"
+            >
+                <span class="empty-bio">
+                    Tell the community a little about yourself.
+                </span>
+            </p>
+
+        </section>
+
+
+        <!-- REPUTATION -->
+
+        <section class="card">
+
+            <h2>
+                Connector Reputation
+            </h2>
+
+            <p class="card-intro">
+                Your reputation is based on the help you
+                provide as a Connector.
+            </p>
+
+
+            <div class="reputation-score">
+
+                <div
+                    class="big-rating"
+                    id="bigRating"
+                >
+                    —
+                </div>
+
+                <div>
+
+                    <div
+                        class="stars"
+                        id="reputationStars"
+                    >
+                        ☆☆☆☆☆
+                    </div>
+
+                    <div
+                        class="review-count"
+                        id="reviewCountText"
+                    >
+                        No reviews yet
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="reputation-note">
+
+                <strong>
+                    How it works:
+                </strong>
+
+                People you help can optionally leave
+                a 1–5 star rating and written review after
+                a completed connection.
+
+            </div>
+
+        </section>
+
+
+        <!-- INFORMATION -->
+
+        <section class="card">
+
+            <h2>
+                My Information
+            </h2>
+
+            <p class="card-intro">
+                The basic information connected to your account.
+            </p>
+
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    Email
+                </span>
+
+                <span
+                    class="info-value"
+                    id="displayEmail"
+                >
+                    —
+                </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    Phone
+                </span>
+
+                <span
+                    class="info-value"
+                    id="displayPhone"
+                >
+                    —
+                </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    General Location
+                </span>
+
+                <span
+                    class="info-value"
+                    id="displayLocation"
+                >
+                    —
+                </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    Role
+                </span>
+
+                <span class="info-value">
+                    Connector / Requester
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- EDIT PROFILE -->
+
+        <section class="card edit-card">
+
+            <h2>
+                Edit Profile
+            </h2>
+
+            <p class="card-intro">
+                Keep your information current.
+            </p>
+
+
+            <form id="profileForm">
+
+
+                <div class="two-fields">
+
+                    <div class="field">
+
+                        <label for="firstName">
+                            First Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="firstName"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label for="lastName">
+                            Last Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="lastName"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="phone">
+                        Phone
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="location">
+                        General Location
+                    </label>
+
+                    <input
+                        type="text"
+                        id="location"
+                        placeholder="Example: Philadelphia, PA"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="bioInput">
+                        About Me
+                    </label>
+
+                    <textarea
+                        id="bioInput"
+                        placeholder="Tell the community a little about yourself."
+                    ></textarea>
+
+                </div>
+
+
+                <button
+                    class="save-button"
+                    type="submit"
+                >
+                    SAVE PROFILE
+                </button>
+
+
+                <div
+                    class="message"
+                    id="message"
+                >
+                    Profile saved successfully.
+                </div>
+
+
+            </form>
+
+        </section>
+
+
+    </div>
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="footer-inner">
+
+        <p>
+            SOS Connect — Help Is Closer Than You Think.
+        </p>
+
+        <a href="/">
+            Back to Home
+        </a>
+
+    </div>
+
+</footer>
+
+
+<script>
+
+
+    // =========================================
+    // LOAD PROFILE
+    // =========================================
+
+    let profile =
+        JSON.parse(
+            localStorage.getItem("sosProfile")
+        ) || {};
+
+
+    // =========================================
+    // FORM ELEMENTS
+    // =========================================
+
+    const firstName =
+        document.getElementById("firstName");
+
+    const lastName =
+        document.getElementById("lastName");
+
+    const email =
+        document.getElementById("email");
+
+    const phone =
+        document.getElementById("phone");
+
+    const location =
+        document.getElementById("location");
+
+    const bioInput =
+        document.getElementById("bioInput");
+
+
+    // =========================================
+    // FILL FORM
+    // =========================================
+
+    firstName.value =
+        profile.firstName || "";
+
+    lastName.value =
+        profile.lastName || "";
+
+    email.value =
+        profile.email || "";
+
+    phone.value =
+        profile.phone || "";
+
+    location.value =
+        profile.location || "";
+
+    bioInput.value =
+        profile.bio || "";
+
+
+    // =========================================
+    // DISPLAY NAME
+    // =========================================
+
+    function updateName() {
+
+        const name =
+            [
+                profile.firstName,
+                profile.lastName
+            ]
+            .filter(Boolean)
+            .join(" ");
+
+
+        document.getElementById("profileName")
+            .textContent =
+            name || "Your Name";
+
+    }
+
+
+    updateName();
+
+
+    // =========================================
+    // DISPLAY PHOTO
+    // =========================================
+
+    const photoContainer =
+        document.getElementById("profilePhoto");
+
+
+    if (profile.photo) {
+
+        photoContainer.innerHTML =
+            `
+                <img
+                    src="${profile.photo}"
+                    alt="Profile photo"
+                >
+            `;
+
+    } else {
+
+        const initials =
+            (
+                (profile.firstName || "").charAt(0) +
+                (profile.lastName || "").charAt(0)
+            ).toUpperCase();
+
+
+        document.getElementById("initials")
+            .textContent =
+            initials || "SC";
+
+    }
+
+
+    // =========================================
+    // DISPLAY CONNECTIONS
+    // =========================================
+
+    document.getElementById("connections")
+        .textContent =
+        profile.connections || 0;
+
+
+    // =========================================
+    // DISPLAY REVIEWS
+    // =========================================
+
+    document.getElementById("reviews")
+        .textContent =
+        profile.reviews || 0;
+
+
+    // =========================================
+    // MEMBER SINCE
+    // =========================================
+
+    if (profile.memberSince) {
+
+        document.getElementById("memberSince")
+            .textContent =
+            profile.memberSince;
+
+    } else {
+
+        document.getElementById("memberSince")
+            .textContent =
+            new Date().getFullYear();
+
+    }
+
+
+    // =========================================
+    // DISPLAY CONTACT INFORMATION
+    // =========================================
+
+    document.getElementById("displayEmail")
+        .textContent =
+        profile.email || "Not provided";
+
+
+    document.getElementById("displayPhone")
+        .textContent =
+        profile.phone || "Not provided";
+
+
+    document.getElementById("displayLocation")
+        .textContent =
+        profile.location || "Not provided";
+
+
+    // =========================================
+    // DISPLAY BIO
+    // =========================================
+
+    const bioDisplay =
+        document.getElementById("bio");
+
+
+    if (profile.bio) {
+
+        bioDisplay.textContent =
+            profile.bio;
+
+    }
+
+
+    // =========================================
+    // RATING
+    // =========================================
+
+    const rating =
+        Number(profile.rating || 0);
+
+
+    function makeStars(value) {
+
+        if (!value) {
+            return "☆☆☆☆☆";
+        }
+
+
+        const rounded =
+            Math.round(value);
+
+
+        let result = "";
+
+
+        for (let i = 1; i <= 5; i++) {
+
+            if (i <= rounded) {
+
+                result += "★";
+
+            } else {
+
+                result += "☆";
+
+            }
+
+        }
+
+
+        return result;
+
+    }
+
+
+    const stars =
+        makeStars(rating);
+
+
+    document.getElementById("stars")
+        .textContent =
+        stars;
+
+
+    document.getElementById("reputationStars")
+        .textContent =
+        stars;
+
+
+    if (rating > 0) {
+
+        document.getElementById("ratingText")
+            .textContent =
+            `${rating.toFixed(1)} out of 5`;
+
+
+        document.getElementById("bigRating")
+            .textContent =
+            rating.toFixed(1);
+
+
+        document.getElementById("reviewCountText")
+            .textContent =
+            `${profile.reviews || 0} reviews`;
+
+    } else {
+
+        document.getElementById("ratingText")
+            .textContent =
+            "New Connector";
+
+
+        document.getElementById("bigRating")
+            .textContent =
+            "—";
+
+
+        document.getElementById("reviewCountText")
+            .textContent =
+            "No reviews yet";
+
+    }
+
+
+    // =========================================
+    // SAVE PROFILE
+    // =========================================
+
+    document.getElementById("profileForm")
+        .addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+
+                profile.firstName =
+                    firstName.value.trim();
+
+
+                profile.lastName =
+                    lastName.value.trim();
+
+
+                profile.email =
+                    email.value.trim();
+
+
+                profile.phone =
+                    phone.value.trim();
+
+
+                profile.location =
+                    location.value.trim();
+
+
+                profile.bio =
+                    bioInput.value.trim();
+
+
+                // Create member date if one doesn't exist
+
+                if (!profile.memberSince) {
+
+                    profile.memberSince =
+                        new Date().getFullYear();
+
+                }
+
+
+                // Save profile
+
+                localStorage.setItem(
+                    "sosProfile",
+                    JSON.stringify(profile)
+                );
+
+
+                // Update page
+
+                updateName();
+
+
+                document.getElementById("displayEmail")
+                    .textContent =
+                    profile.email || "Not provided";
+
+
+                document.getElementById("displayPhone")
+                    .textContent =
+                    profile.phone || "Not provided";
+
+
+                document.getElementById("displayLocation")
+                    .textContent =
+                    profile.location || "Not provided";
+
+
+                if (profile.bio) {
+
+                    bioDisplay.textContent =
+                        profile.bio;
+
+                } else {
+
+                    bioDisplay.innerHTML =
+                        `
+                            <span class="empty-bio">
+                                Tell the community a little about yourself.
+                            </span>
+                        `;
+
+                }
+
+
+                document.getElementById("message")
+                    .style.display =
+                    "block";
+
+
+                setTimeout(
+                    function() {
+
+                        document.getElementById("message")
+                            .style.display =
+                            "none";
+
+                    },
+                    3000
+                );
+
+            }
+        );
+
+
+</script>
+
+
+</body>
+</html>

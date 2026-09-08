@@ -1,0 +1,2613 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        SOS Connect | Dashboard
+    </title>
+
+
+    <!--
+    =====================================================
+    FONTS
+    =====================================================
+    -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+        /*
+        =====================================================
+        BRAND
+        =====================================================
+        */
+
+        :root {
+
+            --navy: #06182A;
+
+            --navy-light: #0D2943;
+
+            --red: #D91F2D;
+
+            --red-light: #FFE9EB;
+
+            --white: #FFFFFF;
+
+            --gray: #F5F7F9;
+
+            --text: #17212B;
+
+            --muted: #667481;
+
+            --border: #DDE3E8;
+
+            --green: #16845B;
+
+            --green-light: #E7F6EF;
+
+        }
+
+
+        /*
+        =====================================================
+        RESET
+        =====================================================
+        */
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            background: var(--gray);
+
+            color: var(--text);
+
+            font-family:
+                "Public Sans",
+                Arial,
+                sans-serif;
+
+            line-height: 1.5;
+
+        }
+
+
+        a {
+
+            color: inherit;
+
+            text-decoration: none;
+
+        }
+
+
+        button {
+
+            font-family: inherit;
+
+        }
+
+
+        /*
+        =====================================================
+        HEADER
+        =====================================================
+        */
+
+        header {
+
+            background: var(--white);
+
+            border-bottom:
+                1px solid
+                var(--border);
+
+        }
+
+
+        .nav {
+
+            max-width: 1180px;
+
+            margin: 0 auto;
+
+            min-height: 82px;
+
+            padding:
+                14px 24px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 25px;
+
+        }
+
+
+        .logo img {
+
+            width: 145px;
+
+            height: auto;
+
+            display: block;
+
+        }
+
+
+        .nav-links {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 26px;
+
+        }
+
+
+        .nav-links a {
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            color: var(--text);
+
+        }
+
+
+        .nav-links a:hover {
+
+            color: var(--red);
+
+        }
+
+
+        /*
+        =====================================================
+        MAIN
+        =====================================================
+        */
+
+        main {
+
+            max-width: 1180px;
+
+            margin: 0 auto;
+
+            padding:
+                55px 24px 80px;
+
+        }
+
+
+        /*
+        =====================================================
+        PAGE HEADING
+        =====================================================
+        */
+
+        .eyebrow {
+
+            color: var(--red);
+
+            font-family:
+                "IBM Plex Mono",
+                monospace;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            letter-spacing: 0.12em;
+
+            text-transform: uppercase;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        h1 {
+
+            margin: 0;
+
+            font-family:
+                "Fraunces",
+                Georgia,
+                serif;
+
+            font-size: clamp(
+                38px,
+                5vw,
+                58px
+            );
+
+            line-height: 1.05;
+
+            color: var(--navy);
+
+        }
+
+
+        .page-heading p {
+
+            max-width: 650px;
+
+            margin:
+                16px 0 0;
+
+            color: var(--muted);
+
+            font-size: 17px;
+
+        }
+
+
+        /*
+        =====================================================
+        TOP GRID
+        =====================================================
+        */
+
+        .top-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1.5fr)
+                minmax(300px, 0.8fr);
+
+            gap: 25px;
+
+            margin-top: 35px;
+
+        }
+
+
+        /*
+        =====================================================
+        CARD
+        =====================================================
+        */
+
+        .card {
+
+            background: var(--white);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 18px;
+
+            padding: 28px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(6, 24, 42, 0.05);
+
+        }
+
+
+        .card h2 {
+
+            margin:
+                0 0 8px;
+
+            color: var(--navy);
+
+            font-family:
+                "Fraunces",
+                Georgia,
+                serif;
+
+            font-size: 28px;
+
+        }
+
+
+        .card-intro {
+
+            margin:
+                0 0 22px;
+
+            color: var(--muted);
+
+            font-size: 14px;
+
+        }
+
+
+        /*
+        =====================================================
+        AVAILABILITY
+        =====================================================
+        */
+
+        .availability-card {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 25px;
+
+        }
+
+
+        .availability-copy h2 {
+
+            margin-bottom: 6px;
+
+        }
+
+
+        .availability-copy p {
+
+            margin: 0;
+
+            color: var(--muted);
+
+            font-size: 14px;
+
+        }
+
+
+        .availability-status {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-top: 12px;
+
+            font-family:
+                "IBM Plex Mono",
+                monospace;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+        }
+
+
+        .status-dot {
+
+            width: 9px;
+
+            height: 9px;
+
+            border-radius: 50%;
+
+            background: #A9B3BB;
+
+        }
+
+
+        .status-dot.active {
+
+            background: var(--green);
+
+            box-shadow:
+                0 0 0 4px
+                var(--green-light);
+
+        }
+
+
+        /*
+        =====================================================
+        TOGGLE
+        =====================================================
+        */
+
+        .toggle {
+
+            position: relative;
+
+            width: 68px;
+
+            height: 38px;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .toggle input {
+
+            opacity: 0;
+
+            width: 0;
+
+            height: 0;
+
+        }
+
+
+        .toggle-slider {
+
+            position: absolute;
+
+            inset: 0;
+
+            cursor: pointer;
+
+            background: #C7D0D7;
+
+            border-radius: 40px;
+
+            transition:
+                0.2s ease;
+
+        }
+
+
+        .toggle-slider::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 28px;
+
+            height: 28px;
+
+            left: 5px;
+
+            top: 5px;
+
+            background: white;
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 2px 5px
+                rgba(0,0,0,0.2);
+
+            transition:
+                0.2s ease;
+
+        }
+
+
+        .toggle input:checked
+        + .toggle-slider {
+
+            background: var(--green);
+
+        }
+
+
+        .toggle input:checked
+        + .toggle-slider::before {
+
+            transform:
+                translateX(30px);
+
+        }
+
+
+        /*
+        =====================================================
+        INCOMING REQUEST
+        =====================================================
+        */
+
+        .request-section {
+
+            margin-top: 25px;
+
+        }
+
+
+        .request-section-heading {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: end;
+
+            gap: 20px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .request-section-heading h2 {
+
+            margin: 0;
+
+            font-family:
+                "Fraunces",
+                Georgia,
+                serif;
+
+            font-size: 30px;
+
+            color: var(--navy);
+
+        }
+
+
+        .request-section-heading span {
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+        }
+
+
+        .request-card {
+
+            display: grid;
+
+            grid-template-columns:
+                auto
+                minmax(0, 1fr)
+                auto;
+
+            gap: 22px;
+
+            align-items: center;
+
+            background: var(--white);
+
+            border:
+                2px solid
+                var(--red);
+
+            border-radius: 18px;
+
+            padding: 24px;
+
+            box-shadow:
+                0 12px 30px
+                rgba(217, 31, 45, 0.08);
+
+        }
+
+
+        /*
+        =====================================================
+        PROFILE PHOTO
+        =====================================================
+        */
+
+        .profile-photo {
+
+            width: 76px;
+
+            height: 76px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            display: block;
+
+            border:
+                3px solid
+                var(--white);
+
+            box-shadow:
+                0 0 0 2px
+                var(--border);
+
+        }
+
+
+        .request-person {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+        }
+
+
+        .request-person-info h3 {
+
+            margin: 0;
+
+            color: var(--navy);
+
+            font-size: 20px;
+
+        }
+
+
+        .rating {
+
+            margin-top: 4px;
+
+            color: #B56B00;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+        }
+
+
+        .request-distance {
+
+            margin-top: 3px;
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+        }
+
+
+        .request-details {
+
+            margin-top: 17px;
+
+            padding-top: 17px;
+
+            border-top:
+                1px solid
+                var(--border);
+
+        }
+
+
+        .request-type {
+
+            display: inline-block;
+
+            padding:
+                5px 9px;
+
+            background:
+                var(--red-light);
+
+            color: var(--red);
+
+            border-radius: 6px;
+
+            font-family:
+                "IBM Plex Mono",
+                monospace;
+
+            font-size: 10px;
+
+            font-weight: 600;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.04em;
+
+        }
+
+
+        .request-title {
+
+            margin:
+                9px 0 5px;
+
+            color: var(--navy);
+
+            font-size: 18px;
+
+            font-weight: 800;
+
+        }
+
+
+        .request-description {
+
+            margin: 0;
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+            max-width: 650px;
+
+        }
+
+
+        /*
+        =====================================================
+        ACTIONS
+        =====================================================
+        */
+
+        .request-actions {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 10px;
+
+            min-width: 130px;
+
+        }
+
+
+        .action-button {
+
+            width: 100%;
+
+            border: none;
+
+            border-radius: 9px;
+
+            padding:
+                13px 18px;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            letter-spacing: 0.04em;
+
+            cursor: pointer;
+
+        }
+
+
+        .accept-button {
+
+            background: var(--red);
+
+            color: white;
+
+        }
+
+
+        .accept-button:hover {
+
+            background: #B91926;
+
+        }
+
+
+        .pass-button {
+
+            background: white;
+
+            color: var(--navy);
+
+            border:
+                1px solid
+                var(--border);
+
+        }
+
+
+        .pass-button:hover {
+
+            background: var(--gray);
+
+        }
+
+
+        /*
+        =====================================================
+        NO REQUEST
+        =====================================================
+        */
+
+        .no-request {
+
+            background: var(--white);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 18px;
+
+            padding: 35px;
+
+            text-align: center;
+
+        }
+
+
+        .no-request-icon {
+
+            width: 48px;
+
+            height: 48px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin: 0 auto 14px;
+
+            border-radius: 50%;
+
+            background: var(--gray);
+
+            color: var(--muted);
+
+            font-weight: 800;
+
+        }
+
+
+        .no-request h3 {
+
+            margin:
+                0 0 6px;
+
+            color: var(--navy);
+
+            font-size: 20px;
+
+        }
+
+
+        .no-request p {
+
+            margin: 0;
+
+            color: var(--muted);
+
+            font-size: 14px;
+
+        }
+
+
+        /*
+        =====================================================
+        CONNECTION CARD
+        =====================================================
+        */
+
+        .active-connection {
+
+            display: none;
+
+            margin-top: 25px;
+
+        }
+
+
+        .active-connection.visible {
+
+            display: block;
+
+        }
+
+
+        .connection-box {
+
+            background:
+                var(--navy);
+
+            color: white;
+
+            border-radius: 18px;
+
+            padding: 28px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 25px;
+
+        }
+
+
+        .connection-box h2 {
+
+            margin:
+                0 0 6px;
+
+            color: white;
+
+            font-family:
+                "Fraunces",
+                Georgia,
+                serif;
+
+            font-size: 27px;
+
+        }
+
+
+        .connection-box p {
+
+            margin: 0;
+
+            color: #C5D0D9;
+
+            font-size: 14px;
+
+        }
+
+
+        .connection-button {
+
+            flex-shrink: 0;
+
+            padding:
+                13px 20px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: white;
+
+            color: var(--navy);
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+        }
+
+
+        /*
+        =====================================================
+        CONNECTOR REPUTATION
+        =====================================================
+        */
+
+        .connector-section {
+
+            margin-top: 35px;
+
+        }
+
+
+        .connector-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 16px;
+
+            margin-top: 18px;
+
+        }
+
+
+        .connector-card {
+
+            background: white;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 15px;
+
+            padding: 20px;
+
+            text-align: center;
+
+        }
+
+
+        .connector-card .profile-photo {
+
+            width: 68px;
+
+            height: 68px;
+
+            margin: 0 auto 12px;
+
+        }
+
+
+        .connector-card h3 {
+
+            margin: 0;
+
+            color: var(--navy);
+
+            font-size: 16px;
+
+        }
+
+
+        .connector-card .connector-rating {
+
+            margin-top: 5px;
+
+            color: #B56B00;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+        }
+
+
+        .connector-card .connector-bio {
+
+            margin:
+                9px 0 0;
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+            line-height: 1.5;
+
+        }
+
+
+        .available-label {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            margin-top: 12px;
+
+            color: var(--green);
+
+            font-family:
+                "IBM Plex Mono",
+                monospace;
+
+            font-size: 10px;
+
+            font-weight: 600;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .available-label::before {
+
+            content: "";
+
+            width: 6px;
+
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: var(--green);
+
+        }
+
+
+        /*
+        =====================================================
+        FOOTER
+        =====================================================
+        */
+
+        footer {
+
+            background: var(--navy);
+
+            color: white;
+
+            padding:
+                35px 24px;
+
+        }
+
+
+        .footer-inner {
+
+            max-width: 1180px;
+
+            margin: auto;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 25px;
+
+        }
+
+
+        footer p {
+
+            margin: 0;
+
+            color: #B9C5CF;
+
+            font-size: 13px;
+
+        }
+
+
+        footer a {
+
+            color: white;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+        }
+
+
+        /*
+        =====================================================
+        MOBILE
+        =====================================================
+        */
+
+        @media (max-width: 950px) {
+
+            .top-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .connector-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .nav {
+
+                flex-direction: column;
+
+            }
+
+
+            .nav-links {
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+
+            }
+
+
+            .availability-card {
+
+                align-items: flex-start;
+
+            }
+
+
+            .request-card {
+
+                grid-template-columns: 1fr;
+
+                text-align: center;
+
+            }
+
+
+            .request-person {
+
+                flex-direction: column;
+
+            }
+
+
+            .request-actions {
+
+                width: 100%;
+
+            }
+
+
+            .connection-box {
+
+                flex-direction: column;
+
+                text-align: center;
+
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            main {
+
+                padding:
+                    40px 16px 60px;
+
+            }
+
+
+            .card {
+
+                padding: 22px;
+
+            }
+
+
+            .connector-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .footer-inner {
+
+                flex-direction: column;
+
+                text-align: center;
+
+            }
+
+        }
+
+    </style>
+
+
+<style>
+/* SOS CONNECT BRAND LAYER */
+:root {
+  --sos-navy: #06182A;
+  --sos-navy-light: #0D2943;
+  --sos-red: #D91F2D;
+  --sos-red-light: #FFE9EB;
+  --sos-white: #FFFFFF;
+  --sos-gray: #F5F7F9;
+  --sos-text: #17212B;
+}
+
+body {
+  background: var(--sos-gray);
+  color: var(--sos-text);
+}
+
+header {
+  background: var(--sos-navy) !important;
+  color: var(--sos-white) !important;
+  border-color: var(--sos-navy) !important;
+}
+
+header a,
+header nav a,
+header .brand,
+header .brand-name {
+  color: var(--sos-white) !important;
+}
+
+footer {
+  background: var(--sos-navy) !important;
+  color: var(--sos-white) !important;
+}
+
+footer a {
+  color: var(--sos-white) !important;
+}
+
+button,
+.btn,
+.primary-button,
+.cta-button,
+.connect-button,
+.connector-button {
+  background: var(--sos-red) !important;
+  border-color: var(--sos-red) !important;
+  color: var(--sos-white) !important;
+}
+
+button:hover,
+.btn:hover,
+.primary-button:hover,
+.cta-button:hover,
+.connect-button:hover,
+.connector-button:hover {
+  background: #C81C29 !important;
+}
+
+.badge,
+.eyebrow,
+.section-eyebrow {
+  color: var(--sos-red) !important;
+}
+
+a {
+  color: var(--sos-navy);
+}
+
+.card,
+.panel,
+.section-card {
+  background: var(--sos-white);
+}
+
+:focus-visible {
+  outline: 3px solid var(--sos-red) !important;
+  outline-offset: 3px;
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+    <nav class="nav">
+
+        <a
+            class="logo"
+            href="/"
+        >
+
+            <img
+                src="/images/sos-connect-logo.png"
+                alt="SOS Connect"
+            >
+
+        </a>
+
+
+        <div class="nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/request-help.html">
+                Get Help
+            </a>
+
+            <a href="/dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="/profile.html">
+                Profile
+            </a>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main>
+
+
+    <!-- =================================================
+         PAGE HEADING
+    ================================================= -->
+
+    <section class="page-heading">
+
+        <div class="eyebrow">
+            CONNECTOR DASHBOARD
+        </div>
+
+
+        <h1 id="welcomeHeading">
+            Ready to Help.
+        </h1>
+
+
+        <p>
+            Turn your availability on when you're ready
+            to receive nearby SOS requests.
+        </p>
+
+    </section>
+
+
+
+    <!-- =================================================
+         TOP CARDS
+    ================================================= -->
+
+    <div class="top-grid">
+
+
+        <!-- =============================================
+             AVAILABILITY
+        ============================================== -->
+
+        <section class="card availability-card">
+
+            <div class="availability-copy">
+
+                <h2>
+                    Available to Help
+                </h2>
+
+
+                <p>
+                    When you're available, nearby people
+                    can send you an SOS Ping.
+                </p>
+
+
+                <div
+                    class="availability-status"
+                    id="availabilityStatus"
+                >
+
+                    <span
+                        class="status-dot"
+                        id="statusDot"
+                    ></span>
+
+                    <span id="availabilityText">
+                        You're currently unavailable
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <label
+                class="toggle"
+                aria-label="Toggle availability"
+            >
+
+                <input
+                    type="checkbox"
+                    id="availabilityToggle"
+                >
+
+                <span class="toggle-slider"></span>
+
+            </label>
+
+        </section>
+
+
+
+        <!-- =============================================
+             HOW IT WORKS
+        ============================================== -->
+
+        <section class="card">
+
+            <h2>
+                How It Works
+            </h2>
+
+
+            <p class="card-intro">
+                Helping someone nearby is simple.
+            </p>
+
+
+            <div>
+
+                <strong>
+                    01 — Go Available
+                </strong>
+
+                <p class="card-intro">
+                    Turn on your availability.
+                </p>
+
+
+                <strong>
+                    02 — Review the Request
+                </strong>
+
+                <p class="card-intro">
+                    See who needs help and what they need.
+                </p>
+
+
+                <strong>
+                    03 — Connect
+                </strong>
+
+                <p class="card-intro">
+                    Accept the request and get connected.
+                </p>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+
+    <!-- =================================================
+         INCOMING REQUEST
+    ================================================= -->
+
+    <section
+        class="request-section"
+        id="requestSection"
+    >
+
+        <div class="request-section-heading">
+
+            <h2>
+                Incoming SOS Ping
+            </h2>
+
+            <span>
+                Demo request
+            </span>
+
+        </div>
+
+
+        <div
+            id="requestContainer"
+        >
+
+            <!-- JavaScript fills this -->
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         ACTIVE CONNECTION
+    ================================================= -->
+
+    <section
+        class="active-connection"
+        id="activeConnectionSection"
+    >
+
+        <div class="connection-box">
+
+            <div>
+
+                <h2>
+                    You're Connected.
+                </h2>
+
+
+                <p>
+                    You accepted a help request.
+                    Open the connection to continue.
+                </p>
+
+            </div>
+
+
+            <button
+                class="connection-button"
+                onclick="openConnection()"
+            >
+                OPEN CONNECTION
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         CONNECTOR COMMUNITY
+    ================================================= -->
+
+    <section class="connector-section">
+
+        <div class="request-section-heading">
+
+            <div>
+
+                <h2>
+                    Connectors Nearby
+                </h2>
+
+            </div>
+
+
+            <span>
+                Demo community
+            </span>
+
+        </div>
+
+
+        <div
+            class="connector-grid"
+            id="connectorGrid"
+        >
+
+            <!-- JavaScript fills this -->
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="footer-inner">
+
+        <p>
+            SOS Connect — Help Is Closer Than You Think.
+        </p>
+
+
+        <a href="/">
+            Back to Home
+        </a>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     DEMO DATA
+===================================================== -->
+
+<script src="/demo-data.js"></script>
+
+
+
+<!-- =====================================================
+     DASHBOARD JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+    /*
+    =====================================================
+    ELEMENTS
+    =====================================================
+    */
+
+    const availabilityToggle =
+        document.getElementById(
+            "availabilityToggle"
+        );
+
+
+    const availabilityText =
+        document.getElementById(
+            "availabilityText"
+        );
+
+
+    const statusDot =
+        document.getElementById(
+            "statusDot"
+        );
+
+
+    const requestContainer =
+        document.getElementById(
+            "requestContainer"
+        );
+
+
+    const activeConnectionSection =
+        document.getElementById(
+            "activeConnectionSection"
+        );
+
+
+    const connectorGrid =
+        document.getElementById(
+            "connectorGrid"
+        );
+
+
+    /*
+    =====================================================
+    CURRENT CONNECTOR
+    =====================================================
+    */
+
+    let currentConnector =
+        getDemoConnectorById(
+            "connector-001"
+        );
+
+
+    /*
+    =====================================================
+    GREETING
+    =====================================================
+    */
+
+    function loadGreeting() {
+
+        const profileData =
+            localStorage.getItem(
+                "sosProfile"
+            );
+
+
+        if (!profileData) {
+
+            return;
+
+        }
+
+
+        try {
+
+            const profile =
+                JSON.parse(
+                    profileData
+                );
+
+
+            if (
+                profile.firstName
+            ) {
+
+                document.getElementById(
+                    "welcomeHeading"
+                ).textContent =
+                    `Ready to Help, ${profile.firstName}.`;
+
+            }
+
+        } catch (error) {
+
+            console.log(
+                "No profile greeting available."
+            );
+
+        }
+
+    }
+
+
+    /*
+    =====================================================
+    AVAILABILITY
+    =====================================================
+    */
+
+    function loadAvailability() {
+
+        const savedAvailability =
+            localStorage.getItem(
+                "sosAvailable"
+            );
+
+
+        /*
+        If nothing has been selected yet,
+        default the demo Connector to ON.
+        */
+
+        if (
+            savedAvailability === null
+        ) {
+
+            availabilityToggle.checked =
+                true;
+
+            localStorage.setItem(
+                "sosAvailable",
+                "true"
+            );
+
+        } else {
+
+            availabilityToggle.checked =
+                savedAvailability === "true";
+
+        }
+
+
+        updateAvailabilityUI();
+
+    }
+
+
+    /*
+    =====================================================
+    UPDATE AVAILABILITY UI
+    =====================================================
+    */
+
+    function updateAvailabilityUI() {
+
+        const isAvailable =
+            availabilityToggle.checked;
+
+
+        localStorage.setItem(
+
+            "sosAvailable",
+
+            String(
+                isAvailable
+            )
+
+        );
+
+
+        if (isAvailable) {
+
+            availabilityText.textContent =
+                "You're available for requests";
+
+
+            statusDot.classList.add(
+                "active"
+            );
+
+
+            currentConnector =
+                getDemoConnectorById(
+                    "connector-001"
+                );
+
+
+            if (currentConnector) {
+
+                currentConnector.available =
+                    true;
+
+                saveConnectorAvailability();
+
+            }
+
+
+            renderIncomingRequest();
+
+        } else {
+
+            availabilityText.textContent =
+                "You're currently unavailable";
+
+
+            statusDot.classList.remove(
+                "active"
+            );
+
+
+            if (currentConnector) {
+
+                currentConnector.available =
+                    false;
+
+                saveConnectorAvailability();
+
+            }
+
+
+            renderUnavailable();
+
+        }
+
+    }
+
+
+    /*
+    =====================================================
+    SAVE CONNECTOR AVAILABILITY
+    =====================================================
+    */
+
+    function saveConnectorAvailability() {
+
+        const connectors =
+            getDemoConnectors();
+
+
+        const connector =
+            connectors.find(
+
+                function(item) {
+
+                    return item.id ===
+                        "connector-001";
+
+                }
+
+            );
+
+
+        if (!connector) {
+
+            return;
+
+        }
+
+
+        connector.available =
+            currentConnector.available;
+
+
+        localStorage.setItem(
+
+            "sosDemoConnectors",
+
+            JSON.stringify(
+                connectors
+            )
+
+        );
+
+    }
+
+
+    /*
+    =====================================================
+    FIND INCOMING REQUEST
+    =====================================================
+    */
+
+    function getIncomingRequest() {
+
+        const requests =
+            getDemoRequests();
+
+
+        /*
+        For the demo, show Ava's request first.
+        */
+
+        const avaRequest =
+            requests.find(
+
+                function(request) {
+
+                    return (
+                        request.id === "request-001"
+                        &&
+                        request.status === "SEARCHING"
+                    );
+
+                }
+
+            );
+
+
+        if (avaRequest) {
+
+            return avaRequest;
+
+        }
+
+
+        /*
+        If Ava's request was passed,
+        show another searching request.
+        */
+
+        return requests.find(
+
+            function(request) {
+
+                return request.status ===
+                    "SEARCHING";
+
+            }
+
+        ) || null;
+
+    }
+
+
+    /*
+    =====================================================
+    RENDER INCOMING REQUEST
+    =====================================================
+    */
+
+    function renderIncomingRequest() {
+
+        /*
+        Don't show incoming requests if
+        the Connector is already helping someone.
+        */
+
+        const activeConnection =
+            getDemoActiveConnection();
+
+
+        if (
+            activeConnection
+            &&
+            activeConnection.status ===
+                "ACCEPTED"
+        ) {
+
+            renderActiveConnection();
+
+            return;
+
+        }
+
+
+        const request =
+            getIncomingRequest();
+
+
+        if (!request) {
+
+            renderNoRequests();
+
+            return;
+
+        }
+
+
+        const requester =
+            getDemoRequesterById(
+                request.requesterId
+            );
+
+
+        const photo =
+            requester &&
+            requester.photo
+                ? requester.photo
+                : "";
+
+
+        const requesterName =
+            requester &&
+            requester.fullName
+                ? requester.fullName
+                : request.requesterName;
+
+
+        requestContainer.innerHTML = `
+
+            <article class="request-card">
+
+                <div>
+
+                    ${
+                        photo
+                            ? `
+                                <img
+                                    class="profile-photo"
+                                    src="${photo}"
+                                    alt="${requesterName}"
+                                >
+                              `
+                            : `
+                                <div
+                                    class="profile-photo"
+                                    style="
+                                        background:#D91F2D;
+                                        color:white;
+                                        display:flex;
+                                        align-items:center;
+                                        justify-content:center;
+                                        font-weight:800;
+                                        font-size:24px;
+                                    "
+                                >
+                                    ${requesterName.charAt(0)}
+                                </div>
+                              `
+                    }
+
+                </div>
+
+
+                <div>
+
+                    <div class="request-person">
+
+                        <div class="request-person-info">
+
+                            <h3>
+                                ${requesterName}
+                            </h3>
+
+
+                            <div class="request-distance">
+
+                                ${request.location}
+                                ·
+                                ${request.distance} miles away
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="request-details">
+
+                        <span class="request-type">
+                            ${request.type}
+                        </span>
+
+
+                        <div class="request-title">
+                            ${request.title}
+                        </div>
+
+
+                        <p class="request-description">
+                            ${request.description}
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="request-actions">
+
+                    <button
+                        class="action-button accept-button"
+                        onclick="acceptRequest('${request.id}')"
+                    >
+                        ACCEPT
+                    </button>
+
+
+                    <button
+                        class="action-button pass-button"
+                        onclick="passRequest('${request.id}')"
+                    >
+                        PASS
+                    </button>
+
+                </div>
+
+            </article>
+
+        `;
+
+    }
+
+
+    /*
+    =====================================================
+    NO REQUESTS
+    =====================================================
+    */
+
+    function renderNoRequests() {
+
+        requestContainer.innerHTML = `
+
+            <div class="no-request">
+
+                <div class="no-request-icon">
+                    ✓
+                </div>
+
+
+                <h3>
+                    No Requests Right Now
+                </h3>
+
+
+                <p>
+                    We'll show an SOS Ping here when
+                    someone nearby needs help.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /*
+    =====================================================
+    UNAVAILABLE
+    =====================================================
+    */
+
+    function renderUnavailable() {
+
+        requestContainer.innerHTML = `
+
+            <div class="no-request">
+
+                <div class="no-request-icon">
+                    —
+                </div>
+
+
+                <h3>
+                    You're Offline
+                </h3>
+
+
+                <p>
+                    Turn on "Available to Help" when
+                    you're ready to receive SOS Pings.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /*
+    =====================================================
+    ACCEPT REQUEST
+    =====================================================
+    */
+
+    function acceptRequest(
+        requestId
+    ) {
+
+        const connection =
+            acceptDemoRequest(
+
+                requestId,
+
+                "connector-001"
+
+            );
+
+
+        if (!connection) {
+
+            alert(
+                "We couldn't accept that request."
+            );
+
+            return;
+
+        }
+
+
+        /*
+        Turn availability off because
+        this Connector is now helping someone.
+        */
+
+        availabilityToggle.checked =
+            false;
+
+
+        localStorage.setItem(
+            "sosAvailable",
+            "false"
+        );
+
+
+        updateAvailabilityUI();
+
+
+        /*
+        Go to the active connection.
+        */
+
+        window.location.href =
+            "/connection.html";
+
+    }
+
+
+    /*
+    =====================================================
+    PASS REQUEST
+    =====================================================
+    */
+
+    function passRequest(
+        requestId
+    ) {
+
+        passDemoRequest(
+            requestId
+        );
+
+
+        renderIncomingRequest();
+
+    }
+
+
+    /*
+    =====================================================
+    ACTIVE CONNECTION
+    =====================================================
+    */
+
+    function renderActiveConnection() {
+
+        requestContainer.innerHTML = `
+
+            <div class="no-request">
+
+                <div
+                    class="no-request-icon"
+                    style="
+                        background:#E7F6EF;
+                        color:#16845B;
+                    "
+                >
+                    ✓
+                </div>
+
+
+                <h3>
+                    You're Helping Someone
+                </h3>
+
+
+                <p>
+                    Your active connection is ready.
+                    Open it below to continue.
+                </p>
+
+            </div>
+
+        `;
+
+
+        activeConnectionSection
+            .classList
+            .add(
+                "visible"
+            );
+
+    }
+
+
+    /*
+    =====================================================
+    OPEN CONNECTION
+    =====================================================
+    */
+
+    function openConnection() {
+
+        window.location.href =
+            "/connection.html";
+
+    }
+
+
+    /*
+    =====================================================
+    RENDER CONNECTORS
+    =====================================================
+    */
+
+    function renderConnectors() {
+
+        const connectors =
+            getDemoConnectors();
+
+
+        connectorGrid.innerHTML =
+            "";
+
+
+        connectors.forEach(
+
+            function(connector) {
+
+                const card =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                card.className =
+                    "connector-card";
+
+
+                const photo =
+                    connector.photo;
+
+
+                card.innerHTML = `
+
+                    ${
+                        photo
+                            ? `
+                                <img
+                                    class="profile-photo"
+                                    src="${photo}"
+                                    alt="${connector.fullName}"
+                                >
+                              `
+                            : `
+                                <div
+                                    class="profile-photo"
+                                    style="
+                                        margin-left:auto;
+                                        margin-right:auto;
+                                        background:#D91F2D;
+                                        color:white;
+                                        display:flex;
+                                        align-items:center;
+                                        justify-content:center;
+                                        font-weight:800;
+                                        font-size:22px;
+                                    "
+                                >
+                                    ${connector.firstName.charAt(0)}
+                                </div>
+                              `
+                    }
+
+
+                    <h3>
+                        ${connector.fullName}
+                    </h3>
+
+
+                    <div class="connector-rating">
+
+                        ★ ${Number(
+                            connector.rating
+                        ).toFixed(1)}
+
+                        ·
+
+                        ${connector.reviews}
+                        reviews
+
+                    </div>
+
+
+                    <p class="connector-bio">
+                        ${connector.bio}
+                    </p>
+
+
+                    ${
+                        connector.available
+                            ? `
+                                <div class="available-label">
+                                    Available
+                                </div>
+                              `
+                            : ""
+                    }
+
+                `;
+
+
+                connectorGrid.appendChild(
+                    card
+                );
+
+            }
+
+        );
+
+    }
+
+
+    /*
+    =====================================================
+    TOGGLE EVENT
+    =====================================================
+    */
+
+    availabilityToggle.addEventListener(
+
+        "change",
+
+        function() {
+
+            updateAvailabilityUI();
+
+            renderConnectors();
+
+        }
+
+    );
+
+
+    /*
+    =====================================================
+    START DASHBOARD
+    =====================================================
+    */
+
+    loadGreeting();
+
+    loadAvailability();
+
+    renderConnectors();
+
+
+</script>
+
+
+</body>
+
+</html>

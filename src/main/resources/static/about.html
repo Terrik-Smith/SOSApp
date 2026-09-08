@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About | SOS Connect</title>
+
+    <meta
+        name="description"
+        content="Learn the story behind SOS Connect and why we believe help goes both ways."
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+        :root {
+            --navy: #06182A;
+            --navy-light: #0D2943;
+            --red: #D91F2D;
+            --red-bright: #ED2635;
+            --red-light: #FFE9EB;
+            --white: #FFFFFF;
+            --gray: #F5F7F9;
+            --text: #17212B;
+            --muted: #5E6A75;
+            --border: #DCE2E7;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Public Sans", sans-serif;
+            color: var(--text);
+            background: var(--gray);
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid var(--red);
+            outline-offset: 4px;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            background: var(--navy);
+            color: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 82px;
+            padding: 0 28px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 155px;
+            height: auto;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: white;
+            font-size: 0.95rem;
+            font-weight: 600;
+            opacity: 0.9;
+            transition: opacity 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        .nav-links .nav-connect {
+            background: var(--red);
+            padding: 11px 18px;
+            border-radius: 8px;
+            opacity: 1;
+        }
+
+        .nav-links .nav-connect:hover {
+            background: var(--red-bright);
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            background: var(--navy);
+            color: white;
+            padding: 95px 28px 105px;
+        }
+
+        .hero-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .eyebrow {
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: #FF9BA3;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            max-width: 850px;
+            font-family: "Fraunces", serif;
+            font-size: clamp(3rem, 7vw, 6.5rem);
+            line-height: 0.98;
+            letter-spacing: -0.045em;
+            margin-bottom: 28px;
+        }
+
+        .hero h1 span {
+            color: #FF6672;
+        }
+
+        .hero p {
+            max-width: 720px;
+            font-size: 1.2rem;
+            line-height: 1.75;
+            color: #E4EAF0;
+        }
+
+        /* =========================
+           SHARED
+        ========================= */
+
+        .section {
+            padding: 95px 28px;
+        }
+
+        .section-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-family: "IBM Plex Mono", monospace;
+            color: var(--red);
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        .section h2 {
+            font-family: "Fraunces", serif;
+            color: var(--navy);
+            font-size: clamp(2.2rem, 4vw, 4rem);
+            line-height: 1.05;
+            letter-spacing: -0.035em;
+            margin-bottom: 28px;
+        }
+
+        .section p {
+            font-size: 1.08rem;
+            line-height: 1.85;
+            color: var(--muted);
+        }
+
+        /* =========================
+           OUR STORY
+        ========================= */
+
+        .story {
+            background: white;
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .story-intro {
+            position: sticky;
+            top: 125px;
+        }
+
+        .story-intro h2 {
+            margin-bottom: 18px;
+        }
+
+        .story-intro .quote {
+            border-left: 4px solid var(--red);
+            padding-left: 20px;
+            margin-top: 30px;
+            color: var(--navy);
+            font-family: "Fraunces", serif;
+            font-size: 1.45rem;
+            line-height: 1.4;
+        }
+
+        .story-copy {
+            display: flex;
+            flex-direction: column;
+            gap: 26px;
+        }
+
+        .story-copy p {
+            font-size: 1.1rem;
+        }
+
+        .story-copy .lead {
+            color: var(--navy);
+            font-size: 1.35rem;
+            font-weight: 600;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           BELIEF
+        ========================= */
+
+        .belief {
+            background: var(--red);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .belief::after {
+            content: "SOS";
+            position: absolute;
+            right: -30px;
+            bottom: -100px;
+            font-family: "Fraunces", serif;
+            font-size: 18rem;
+            line-height: 1;
+            font-weight: 700;
+            color: rgba(255,255,255,0.06);
+            pointer-events: none;
+        }
+
+        .belief-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .belief .section-label {
+            color: #FFD5D8;
+        }
+
+        .belief h2 {
+            color: white;
+            margin-bottom: 24px;
+        }
+
+        .belief p {
+            color: #FFF0F1;
+            max-width: 720px;
+            margin: 0 auto;
+            font-size: 1.18rem;
+        }
+
+        .belief-quote {
+            font-family: "Fraunces", serif;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            line-height: 1.25;
+            margin-top: 42px;
+            color: white;
+        }
+
+        /* =========================
+           HOW IT WORKS
+        ========================= */
+
+        .how {
+            background: var(--gray);
+        }
+
+        .how-header {
+            max-width: 700px;
+            margin-bottom: 55px;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .step {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 34px;
+            min-height: 250px;
+        }
+
+        .step-number {
+            font-family: "IBM Plex Mono", monospace;
+            color: var(--red);
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 25px;
+        }
+
+        .step h3 {
+            font-family: "Fraunces", serif;
+            color: var(--navy);
+            font-size: 2rem;
+            margin-bottom: 14px;
+        }
+
+        .step p {
+            font-size: 0.98rem;
+        }
+
+        /* =========================
+           VALUES
+        ========================= */
+
+        .values {
+            background: white;
+        }
+
+        .values-header {
+            max-width: 700px;
+            margin-bottom: 55px;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .value {
+            border-top: 3px solid var(--navy);
+            padding: 28px 8px 20px;
+        }
+
+        .value h3 {
+            color: var(--navy);
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .value p {
+            font-size: 0.95rem;
+        }
+
+        /* =========================
+           MISSION
+        ========================= */
+
+        .mission {
+            background: var(--navy);
+            color: white;
+            text-align: center;
+        }
+
+        .mission-inner {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .mission .section-label {
+            color: #FF9BA3;
+        }
+
+        .mission h2 {
+            color: white;
+            margin-bottom: 25px;
+        }
+
+        .mission p {
+            color: #DCE5ED;
+            max-width: 700px;
+            margin: 0 auto 35px;
+        }
+
+        .mission-line {
+            font-family: "Fraunces", serif;
+            color: white;
+            font-size: clamp(1.7rem, 4vw, 2.8rem);
+            margin-bottom: 40px;
+        }
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 50px;
+            padding: 13px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: all 0.2s ease;
+        }
+
+        .button-primary {
+            background: var(--red);
+            color: white;
+        }
+
+        .button-primary:hover {
+            background: var(--red-bright);
+            transform: translateY(-1px);
+        }
+
+        .button-secondary {
+            background: white;
+            color: var(--navy);
+        }
+
+        .button-secondary:hover {
+            background: #EAF0F4;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #04111E;
+            color: white;
+            padding: 50px 28px 30px;
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            padding-bottom: 35px;
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+        }
+
+        .footer-brand img {
+            width: 145px;
+            margin-bottom: 18px;
+        }
+
+        .footer-brand p {
+            max-width: 350px;
+            color: #AAB8C4;
+            font-size: 0.92rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+
+        .footer-links a {
+            color: #DCE5ED;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            padding-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            color: #8494A2;
+            font-size: 0.8rem;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            .nav {
+                min-height: 72px;
+                padding: 0 18px;
+            }
+
+            .logo img {
+                width: 125px;
+            }
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .nav-links a:not(.nav-connect) {
+                display: none;
+            }
+
+            .hero {
+                padding: 70px 22px 80px;
+            }
+
+            .section {
+                padding: 70px 22px;
+            }
+
+            .story-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .story-intro {
+                position: static;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .value {
+                padding: 24px 0;
+            }
+
+            .footer-top {
+                flex-direction: column;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <nav class="nav" aria-label="Main navigation">
+
+        <a href="/" class="logo" aria-label="SOS Connect home">
+            <img
+                src="/images/sos-connect-logo.png"
+                alt="SOS Connect"
+            >
+        </a>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/request-help.html">Get Help</a>
+            <a href="/connector.html">Become a Connector</a>
+            <a href="/dashboard.html">Dashboard</a>
+            <a href="/profile.html">Profile</a>
+
+            <a href="/request-help.html" class="nav-connect">
+                CONNECT
+            </a>
+        </div>
+
+    </nav>
+</header>
+
+
+<main>
+
+    <!-- HERO -->
+
+    <section class="hero">
+        <div class="hero-inner">
+
+            <div class="eyebrow">
+                ABOUT SOS CONNECT
+            </div>
+
+            <h1>
+                Help Goes <span>Both Ways.</span>
+            </h1>
+
+            <p>
+                SOS Connect was built around a simple belief:
+                the help someone receives today can become the help
+                they give tomorrow.
+            </p>
+
+        </div>
+    </section>
+
+
+    <!-- OUR STORY -->
+
+    <section class="section story">
+
+        <div class="section-inner story-grid">
+
+            <div class="story-intro">
+
+                <div class="section-label">
+                    Our Story
+                </div>
+
+                <h2>
+                    It started with a way of life.
+                </h2>
+
+                <p>
+                    SOS Connect was inspired by a lifetime of seeing
+                    what it means to help others.
+                </p>
+
+                <div class="quote">
+                    “Helping people is more than an occasional act.
+                    It can become a way of life.”
+                </div>
+
+            </div>
+
+
+            <div class="story-copy">
+
+                <p class="lead">
+                    I was raised by a mother whose life centered around
+                    helping people.
+                </p>
+
+                <p>
+                    She adopted children, advocated for children and
+                    people in need, gave food to people experiencing
+                    homelessness, volunteered through churches and an
+                    animal shelter, worked with the NAACP, supported
+                    family members, and consistently found ways to help
+                    others.
+                </p>
+
+                <p>
+                    Watching her showed me that helping people does not
+                    have to be something you do once in a while.
+                    It can become part of who you are.
+                </p>
+
+                <p>
+                    But I also learned the other side of helping:
+                    receiving it.
+                </p>
+
+                <p>
+                    Friends, family, and community services provided
+                    support during some of life's most difficult moments
+                    as well as some of its best.
+                </p>
+
+                <p>
+                    Those experiences created a desire to pay that
+                    support forward.
+                </p>
+
+                <p>
+                    SOS Connect was created around that idea.
+                </p>
+
+                <p class="lead">
+                    The help someone receives today can become the help
+                    they give tomorrow.
+                </p>
+
+                <p>
+                    The goal is to build a platform that can connect
+                    people anywhere who need assistance, regardless of
+                    the type of help they need.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- BELIEF -->
+
+    <section class="section belief">
+
+        <div class="belief-inner">
+
+            <div class="section-label">
+                What We Believe
+            </div>
+
+            <h2>
+                Nobody should feel like they have to face a problem alone.
+            </h2>
+
+            <p>
+                Sometimes you need someone to help you.
+                Sometimes you are the person who can help.
+                SOS Connect brings those two moments together.
+            </p>
+
+            <div class="belief-quote">
+                Receive help.<br>
+                Give help.<br>
+                Pay it forward.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- HOW IT WORKS -->
+
+    <section class="section how">
+
+        <div class="section-inner">
+
+            <div class="how-header">
+
+                <div class="section-label">
+                    How SOS Connect Works
+                </div>
+
+                <h2>
+                    Simple help. Real connections.
+                </h2>
+
+                <p>
+                    SOS Connect makes it easier to ask for help,
+                    find someone nearby, and create a connection
+                    that can go both ways.
+                </p>
+
+            </div>
+
+
+            <div class="steps">
+
+                <article class="step">
+
+                    <div class="step-number">
+                        01 — NEED
+                    </div>
+
+                    <h3>
+                        Ask
+                    </h3>
+
+                    <p>
+                        Tell SOS Connect what you need help with
+                        and where you need it.
+                    </p>
+
+                </article>
+
+
+                <article class="step">
+
+                    <div class="step-number">
+                        02 — CONNECT
+                    </div>
+
+                    <h3>
+                        Connect
+                    </h3>
+
+                    <p>
+                        Nearby available Connectors can see the
+                        request and choose to help.
+                    </p>
+
+                </article>
+
+
+                <article class="step">
+
+                    <div class="step-number">
+                        03 — GIVE
+                    </div>
+
+                    <h3>
+                        Pay It Forward
+                    </h3>
+
+                    <p>
+                        A connection becomes an opportunity to
+                        help someone today and keep the cycle going.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- VALUES -->
+
+    <section class="section values">
+
+        <div class="section-inner">
+
+            <div class="values-header">
+
+                <div class="section-label">
+                    What Matters To Us
+                </div>
+
+                <h2>
+                    Built around people.
+                </h2>
+
+                <p>
+                    The platform is technology, but the reason for
+                    building it is human.
+                </p>
+
+            </div>
+
+
+            <div class="values-grid">
+
+                <article class="value">
+                    <h3>Compassion</h3>
+                    <p>
+                        See people as people, not problems to solve.
+                    </p>
+                </article>
+
+                <article class="value">
+                    <h3>Community</h3>
+                    <p>
+                        Strong communities are built by people helping
+                        one another.
+                    </p>
+                </article>
+
+                <article class="value">
+                    <h3>Connection</h3>
+                    <p>
+                        Real help starts with meaningful human
+                        connections.
+                    </p>
+                </article>
+
+                <article class="value">
+                    <h3>Trust</h3>
+                    <p>
+                        Create an experience where people can connect
+                        with confidence and respect.
+                    </p>
+                </article>
+
+                <article class="value">
+                    <h3>Pay It Forward</h3>
+                    <p>
+                        Receiving help today can inspire someone to
+                        give help tomorrow.
+                    </p>
+                </article>
+
+                <article class="value">
+                    <h3>Accessibility</h3>
+                    <p>
+                        Help should be easier to find and easier to give.
+                    </p>
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MISSION -->
+
+    <section class="section mission">
+
+        <div class="mission-inner">
+
+            <div class="section-label">
+                Our Mission
+            </div>
+
+            <h2>
+                Connect people. Give help. Pay it forward.
+            </h2>
+
+            <p>
+                We are building SOS Connect around the belief that
+                everyone has something they may need and something
+                they may be able to give.
+            </p>
+
+            <div class="mission-line">
+                Help Is Closer Than You Think.
+            </div>
+
+            <div class="actions">
+
+                <a
+                    href="/request-help.html"
+                    class="button button-primary"
+                >
+                    GET HELP
+                </a>
+
+                <a
+                    href="/connector.html"
+                    class="button button-secondary"
+                >
+                    BECOME A CONNECTOR
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <div class="footer-inner">
+
+        <div class="footer-top">
+
+            <div class="footer-brand">
+
+                <img
+                    src="/images/sos-connect-logo.png"
+                    alt="SOS Connect"
+                >
+
+                <p>
+                    Help Is Closer Than You Think.
+                    Connect people. Give help. Pay it forward.
+                </p>
+
+            </div>
+
+
+            <nav
+                class="footer-links"
+                aria-label="Footer navigation"
+            >
+                <a href="/">Home</a>
+                <a href="/request-help.html">Get Help</a>
+                <a href="/connector.html">Become a Connector</a>
+                <a href="/dashboard.html">Dashboard</a>
+                <a href="/profile.html">Profile</a>
+            </nav>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 SOS Connect. All rights reserved.
+            </span>
+
+            <span>
+                Receive help. Give help. Pay it forward.
+            </span>
+
+        </div>
+
+    </div>
+
+</footer>
+
+</body>
+</html>

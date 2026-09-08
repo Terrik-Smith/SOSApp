@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SOS Connect | Become a Connector</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@500;600&family=Public+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        :root {
+            --navy: #06182A;
+            --navy-light: #0D2943;
+            --red: #ED2635;
+            --red-dark: #D91F2D;
+            --red-light: #FFE9EB;
+            --white: #FFFFFF;
+            --soft: #F5F7F9;
+            --text: #17212B;
+            --muted: #5B6875;
+            --border: #D9E0E6;
+            --max: 1180px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Public Sans", Arial, sans-serif;
+            color: var(--text);
+            background: var(--soft);
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        input,
+        textarea {
+            font: inherit;
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--red);
+            outline-offset: 4px;
+        }
+
+        .skip {
+            position: fixed;
+            left: 16px;
+            top: -70px;
+            background: white;
+            color: var(--navy);
+            padding: 12px 18px;
+            border: 3px solid var(--red);
+            border-radius: 8px;
+            z-index: 100;
+        }
+
+        .skip:focus {
+            top: 16px;
+        }
+
+        .container {
+            width: min(92%, var(--max));
+            margin: auto;
+        }
+
+        .site-header {
+            background: var(--navy);
+            color: white;
+            border-bottom: 1px solid rgba(255,255,255,.15);
+        }
+
+        .navbar {
+            min-height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .brand img {
+            width: 44px;
+            height: 44px;
+            object-fit: contain;
+        }
+
+        .brand span span {
+            color: var(--red);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            font-size: .9rem;
+            font-weight: 600;
+        }
+
+        .nav-links a {
+            opacity: .9;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        .nav-cta {
+            background: var(--red-dark);
+            padding: 9px 15px;
+            border-radius: 7px;
+            color: white !important;
+        }
+
+        .mono {
+            font-family: "IBM Plex Mono", monospace;
+            text-transform: uppercase;
+            letter-spacing: .16em;
+            font-size: .7rem;
+            font-weight: 600;
+            color: var(--red);
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: "Fraunces", Georgia, serif;
+            line-height: 1.05;
+            color: var(--navy);
+            margin: 0;
+        }
+
+        p {
+            color: var(--muted);
+        }
+
+        .page-hero {
+            background: white;
+            padding: 70px 0 55px;
+        }
+
+        .page-hero .container {
+            max-width: 820px;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin: 10px 0 18px;
+        }
+
+        .page-hero h1 span {
+            color: var(--red-dark);
+        }
+
+        .page-hero p {
+            font-size: 1.05rem;
+            margin: 0 auto;
+            max-width: 680px;
+        }
+
+        .signup-wrap {
+            padding: 50px 0 70px;
+        }
+
+        .signup-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.25fr;
+            gap: 28px;
+            align-items: start;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: 0 12px 35px rgba(6,24,42,.07);
+        }
+
+        .intro {
+            padding: 36px;
+        }
+
+        .intro h2 {
+            font-size: 2.2rem;
+            margin: 10px 0 16px;
+        }
+
+        .promise {
+            background: var(--soft);
+            border-radius: 12px;
+            padding: 18px;
+            margin-top: 25px;
+        }
+
+        .form-card {
+            padding: 36px;
+        }
+
+        .form-card h2 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .form-card > p {
+            margin-top: 0;
+        }
+
+        .photo-row {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin: 25px 0;
+        }
+
+        .photo-preview {
+            width: 84px;
+            height: 84px;
+            border-radius: 50%;
+            background: var(--navy);
+            border: 3px solid var(--red);
+            display: grid;
+            place-items: center;
+            color: white;
+            font-size: .7rem;
+            font-weight: 700;
+            overflow: hidden;
+        }
+
+        .photo-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .upload {
+            display: inline-block;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .upload input {
+            display: none;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 17px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            margin-bottom: 17px;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-weight: 700;
+            font-size: .9rem;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            border: 1px solid #C9D2DB;
+            border-radius: 8px;
+            padding: 12px 13px;
+            background: white;
+            color: var(--text);
+        }
+
+        textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        .check {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            margin: 18px 0;
+            color: var(--muted);
+            font-size: .9rem;
+        }
+
+        .check input {
+            width: auto;
+            margin-top: 5px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            border: 0;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--red-dark);
+            color: white;
+        }
+
+        .btn-wide {
+            width: 100%;
+        }
+
+        .note {
+            font-size: .8rem;
+            margin-top: 10px;
+        }
+
+        .footer {
+            background: var(--navy);
+            color: white;
+            padding: 30px 0;
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .footer p {
+            margin: 0;
+            color: #B9C5D1;
+            font-size: .85rem;
+        }
+
+        @media (max-width: 850px) {
+
+            .signup-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 560px) {
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .field.full {
+                grid-column: auto;
+            }
+
+        }
+
+        @media (max-width: 760px) {
+
+            .nav-links {
+                gap: 10px;
+                font-size: .75rem;
+            }
+
+            .navbar {
+                min-height: 68px;
+            }
+
+            .brand img {
+                width: 38px;
+                height: 38px;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+
+<style>
+/* SOS CONNECT BRAND LAYER */
+:root {
+  --sos-navy: #06182A;
+  --sos-navy-light: #0D2943;
+  --sos-red: #D91F2D;
+  --sos-red-light: #FFE9EB;
+  --sos-white: #FFFFFF;
+  --sos-gray: #F5F7F9;
+  --sos-text: #17212B;
+}
+
+body {
+  background: var(--sos-gray);
+  color: var(--sos-text);
+}
+
+header {
+  background: var(--sos-navy) !important;
+  color: var(--sos-white) !important;
+  border-color: var(--sos-navy) !important;
+}
+
+header a,
+header nav a,
+header .brand,
+header .brand-name {
+  color: var(--sos-white) !important;
+}
+
+footer {
+  background: var(--sos-navy) !important;
+  color: var(--sos-white) !important;
+}
+
+footer a {
+  color: var(--sos-white) !important;
+}
+
+button,
+.btn,
+.primary-button,
+.cta-button,
+.connect-button,
+.connector-button {
+  background: var(--sos-red) !important;
+  border-color: var(--sos-red) !important;
+  color: var(--sos-white) !important;
+}
+
+button:hover,
+.btn:hover,
+.primary-button:hover,
+.cta-button:hover,
+.connect-button:hover,
+.connector-button:hover {
+  background: #C81C29 !important;
+}
+
+.badge,
+.eyebrow,
+.section-eyebrow {
+  color: var(--sos-red) !important;
+}
+
+a {
+  color: var(--sos-navy);
+}
+
+.card,
+.panel,
+.section-card {
+  background: var(--sos-white);
+}
+
+:focus-visible {
+  outline: 3px solid var(--sos-red) !important;
+  outline-offset: 3px;
+}
+</style>
+
+</head>
+
+<body>
+
+<a class="skip" href="#main">
+    Skip to main content
+</a>
+
+<header class="site-header">
+
+    <nav class="navbar container" aria-label="Primary navigation">
+
+        <a class="brand" href="/">
+
+            <img
+                src="/images/sos-connect-logo.png"
+                alt="SOS Connect"
+            >
+
+            <span>
+                SOS <span>CONNECT</span>
+            </span>
+
+        </a>
+
+        <div class="nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a
+                class="nav-cta"
+                href="/request-help.html"
+            >
+                Get Help
+            </a>
+
+            <a href="/dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="/profile.html">
+                Profile
+            </a>
+
+        </div>
+
+    </nav>
+
+</header>
+
+<main id="main">
+
+    <section class="page-hero">
+
+        <div class="container">
+
+            <div class="mono">
+                Want to Help?
+            </div>
+
+            <h1>
+                Become a <span>Connector.</span>
+            </h1>
+
+            <p>
+                You might need a hand today.
+                Tomorrow, you might be the one giving it.
+                Create your Connector profile and help when you can.
+            </p>
+
+        </div>
+
+    </section>
+
+    <section class="signup-wrap">
+
+        <div class="container signup-grid">
+
+            <aside class="card intro">
+
+                <div class="mono">
+                    Help Goes Both Ways
+                </div>
+
+                <h2>
+                    Help someone when you can.
+                </h2>
+
+                <p>
+                    SOS Connect lets the same person ask for help
+                    today and give help tomorrow.
+                    Becoming a Connector does not lock you
+                    into a permanent role.
+                </p>
+
+                <div class="promise">
+
+                    <strong>
+                        No required skills.
+                    </strong>
+
+                    <p>
+                        You don't have to choose categories
+                        or commit to a fixed schedule.
+                        When you're ready, your Dashboard lets
+                        you turn your availability on.
+                    </p>
+
+                </div>
+
+            </aside>
+
+            <section
+                class="card form-card"
+                aria-labelledby="signup-title"
+            >
+
+                <h2 id="signup-title">
+                    Create your Connector profile
+                </h2>
+
+                <p>
+                    Your profile builds trust when you connect
+                    with someone.
+                </p>
+
+                <div class="photo-row">
+
+                    <div
+                        class="photo-preview"
+                        id="photoPreview"
+                    >
+                        PHOTO
+                    </div>
+
+                    <label class="upload">
+
+                        Upload photo
+
+                        <input
+                            id="photo"
+                            type="file"
+                            accept="image/*"
+                        >
+
+                    </label>
+
+                </div>
+
+                <form id="connectorForm">
+
+                    <div class="form-grid">
+
+                        <div class="field">
+
+                            <label for="firstName">
+                                First name
+                            </label>
+
+                            <input
+                                id="firstName"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="field">
+
+                            <label for="lastName">
+                                Last name
+                            </label>
+
+                            <input
+                                id="lastName"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="field">
+
+                            <label for="email">
+                                Email
+                            </label>
+
+                            <input
+                                id="email"
+                                type="email"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="field">
+
+                            <label for="phone">
+                                Phone
+                            </label>
+
+                            <input
+                                id="phone"
+                                type="tel"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="field full">
+
+                            <label for="location">
+                                General location
+                            </label>
+
+                            <input
+                                id="location"
+                                placeholder="Example: Philadelphia, PA"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="field full">
+
+                            <label for="bio">
+                                Short bio
+                            </label>
+
+                            <textarea
+                                id="bio"
+                                placeholder="Tell your community a little about yourself."
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
+                    <label class="check">
+
+                        <input
+                            id="agree"
+                            type="checkbox"
+                            required
+                        >
+
+                        <span>
+                            I understand that I can turn my availability
+                            on or off from my Dashboard.
+                        </span>
+
+                    </label>
+
+                    <button
+                        class="btn btn-primary btn-wide"
+                        type="submit"
+                    >
+                        BECOME A CONNECTOR
+                        <span aria-hidden="true">→</span>
+                    </button>
+
+                    <p
+                        class="note"
+                        id="message"
+                        role="status"
+                    ></p>
+
+                </form>
+
+            </section>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer class="footer">
+
+    <div class="container footer-inner">
+
+        <div>
+
+            <strong>
+                SOS CONNECT
+            </strong>
+
+            <p>
+                Connect people. Give help. Pay it forward.
+            </p>
+
+        </div>
+
+        <p>
+            © 2026 SOS Connect
+        </p>
+
+    </div>
+
+</footer>
+
+<script>
+
+    const photo =
+        document.getElementById("photo");
+
+    photo.addEventListener("change", () => {
+
+        const file = photo.files[0];
+
+        if (!file) {
+            return;
+        }
+
+        const reader =
+            new FileReader();
+
+        reader.onload = () => {
+
+            document.getElementById(
+                "photoPreview"
+            ).innerHTML =
+                '<img alt="Profile photo preview" src="' +
+                reader.result +
+                '">';
+
+        };
+
+        reader.readAsDataURL(file);
+
+    });
+
+
+    document
+        .getElementById("connectorForm")
+        .addEventListener("submit", (event) => {
+
+            event.preventDefault();
+
+            const profile = {
+
+                firstName:
+                    document.getElementById("firstName").value.trim(),
+
+                lastName:
+                    document.getElementById("lastName").value.trim(),
+
+                email:
+                    document.getElementById("email").value.trim(),
+
+                phone:
+                    document.getElementById("phone").value.trim(),
+
+                location:
+                    document.getElementById("location").value.trim(),
+
+                bio:
+                    document.getElementById("bio").value.trim(),
+
+                photo:
+                    document.querySelector(
+                        "#photoPreview img"
+                    )?.src || "",
+
+                reviews: 0,
+
+                connections: 0,
+
+                rating: 0
+
+            };
+
+            localStorage.setItem(
+                "sosProfile",
+                JSON.stringify(profile)
+            );
+
+            localStorage.setItem(
+                "sosAvailable",
+                "false"
+            );
+
+            document.getElementById(
+                "message"
+            ).textContent =
+                "Profile created. Taking you to your Dashboard…";
+
+            setTimeout(() => {
+
+                window.location.href =
+                    "/dashboard.html";
+
+            }, 500);
+
+        });
+
+</script>
+
+</body>
+
+</html>

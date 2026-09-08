@@ -1,0 +1,1892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>SOS Connect | Active Connection</title>
+
+    <!-- MapLibre -->
+    <link
+        href="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.css"
+        rel="stylesheet"
+    >
+
+    <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
+
+    <style>
+        :root {
+            --navy: #06182A;
+            --navy-light: #0D2943;
+            --red: #D91F2D;
+            --red-light: #FFE9EB;
+            --white: #FFFFFF;
+            --gray: #F5F7F9;
+            --text: #17212B;
+            --muted: #66727F;
+            --border: #DDE3E8;
+            --green: #177245;
+            --green-light: #E9F7EF;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family:
+                "Public Sans",
+                Arial,
+                sans-serif;
+            background: var(--gray);
+            color: var(--text);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            background: var(--navy);
+            color: var(--white);
+            padding: 18px 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+        }
+
+        .brand img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+        }
+
+        .brand-name {
+            font-size: 20px;
+            letter-spacing: 0.3px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            opacity: 0.92;
+        }
+
+        nav a:hover,
+        nav a:focus {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        main {
+            width: min(1180px, 92%);
+            margin: 0 auto;
+            padding: 54px 0 80px;
+        }
+
+        .hero {
+            margin-bottom: 34px;
+        }
+
+        .eyebrow {
+            color: var(--red);
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            font-family: Georgia, serif;
+            font-size: clamp(38px, 6vw, 62px);
+            line-height: 1.02;
+            color: var(--navy);
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: 0;
+            color: var(--muted);
+            font-size: 18px;
+            line-height: 1.65;
+        }
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .status-banner {
+            background: var(--green-light);
+            border: 1px solid #B9DEC9;
+            border-radius: 18px;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .status-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--green);
+            color: white;
+            display: grid;
+            place-items: center;
+            font-size: 23px;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .status-banner strong {
+            display: block;
+            color: var(--green);
+            margin-bottom: 4px;
+            font-size: 16px;
+        }
+
+        .status-banner span {
+            color: #496255;
+            font-size: 14px;
+        }
+
+        /* =========================
+           GRID
+        ========================= */
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.35fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 26px;
+            box-shadow: 0 8px 28px rgba(6, 24, 42, 0.06);
+        }
+
+        .card + .card {
+            margin-top: 24px;
+        }
+
+        .card h2 {
+            margin: 0 0 18px;
+            color: var(--navy);
+            font-family: Georgia, serif;
+            font-size: 27px;
+        }
+
+        .card h3 {
+            margin: 0 0 8px;
+            color: var(--navy);
+            font-size: 18px;
+        }
+
+        .muted {
+            color: var(--muted);
+        }
+
+        /* =========================
+           REQUESTER
+        ========================= */
+
+        .person {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+
+        .person-photo {
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--red-light);
+            background: var(--gray);
+            flex-shrink: 0;
+        }
+
+        .person-name {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 5px;
+        }
+
+        .person-role {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .request-type {
+            display: inline-block;
+            background: var(--red-light);
+            color: var(--red);
+            border-radius: 999px;
+            padding: 7px 12px;
+            font-size: 12px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .request-title {
+            font-size: 25px;
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+
+        .request-description {
+            color: var(--muted);
+            line-height: 1.65;
+            margin-bottom: 20px;
+        }
+
+        .detail-list {
+            display: grid;
+            gap: 13px;
+        }
+
+        .detail {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding-bottom: 13px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .detail:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .detail-label {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .detail-value {
+            color: var(--navy);
+            font-weight: 700;
+            text-align: right;
+            font-size: 14px;
+        }
+
+        /* =========================
+           MAP
+        ========================= */
+
+        .map-card {
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .map-header {
+            padding: 24px 26px 18px;
+        }
+
+        .map-header h2 {
+            margin-bottom: 6px;
+        }
+
+        .map-header p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        #map {
+            width: 100%;
+            height: 470px;
+        }
+
+        .map-footer {
+            padding: 16px 22px;
+            background: white;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* =========================
+           ACTIONS
+        ========================= */
+
+        .actions {
+            margin-top: 24px;
+        }
+
+        .complete-button {
+            width: 100%;
+            border: none;
+            border-radius: 14px;
+            background: var(--red);
+            color: white;
+            padding: 17px 22px;
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: 0.3px;
+            cursor: pointer;
+            transition: transform 0.15s ease, background 0.15s ease;
+        }
+
+        .complete-button:hover {
+            background: #C81C29;
+            transform: translateY(-1px);
+        }
+
+        .complete-button:focus {
+            outline: 4px solid var(--red-light);
+            outline-offset: 2px;
+        }
+
+        .secondary-button {
+            width: 100%;
+            margin-top: 12px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: white;
+            color: var(--navy);
+            padding: 15px 22px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .secondary-button:hover {
+            background: var(--gray);
+        }
+
+        /* =========================
+           CONNECTOR INFO
+        ========================= */
+
+        .connector-card {
+            background: var(--navy);
+            color: white;
+        }
+
+        .connector-card h2 {
+            color: white;
+        }
+
+        .connector-card .muted {
+            color: #B9C7D3;
+        }
+
+        .connector-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .connector-stat {
+            background: rgba(255,255,255,0.08);
+            border-radius: 14px;
+            padding: 14px 10px;
+            text-align: center;
+        }
+
+        .connector-stat strong {
+            display: block;
+            font-size: 20px;
+            margin-bottom: 3px;
+        }
+
+        .connector-stat span {
+            color: #B9C7D3;
+            font-size: 11px;
+        }
+
+        /* =========================
+           COMPLETED MESSAGE
+        ========================= */
+
+        .completed {
+            display: none;
+            background: var(--green-light);
+            border: 1px solid #B9DEC9;
+            border-radius: 18px;
+            padding: 22px;
+            margin-top: 24px;
+        }
+
+        .completed.show {
+            display: block;
+        }
+
+        .completed h3 {
+            color: var(--green);
+        }
+
+        .completed p {
+            color: #496255;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        /* =========================
+           EMPTY STATE
+        ========================= */
+
+        .empty-state {
+            display: none;
+            max-width: 650px;
+            margin: 80px auto;
+            text-align: center;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 50px 30px;
+            box-shadow: 0 8px 28px rgba(6, 24, 42, 0.06);
+        }
+
+        .empty-state.show {
+            display: block;
+        }
+
+        .empty-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: var(--red-light);
+            color: var(--red);
+            display: grid;
+            place-items: center;
+            margin: 0 auto 18px;
+            font-size: 28px;
+        }
+
+        .empty-state h2 {
+            margin: 0 0 10px;
+            font-family: Georgia, serif;
+            color: var(--navy);
+        }
+
+        .empty-state p {
+            color: var(--muted);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .home-button {
+            display: inline-block;
+            background: var(--red);
+            color: white;
+            padding: 14px 22px;
+            border-radius: 12px;
+            font-weight: 800;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 850px) {
+            header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            nav {
+                gap: 14px;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            #map {
+                height: 380px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            main {
+                width: 94%;
+                padding-top: 35px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .status-banner {
+                padding: 17px;
+            }
+
+            .connector-stat-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .detail {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .detail-value {
+                text-align: left;
+            }
+        }
+    </style>
+
+<style>
+/* SOS CONNECT BRAND LAYER */
+:root {
+  --sos-navy: #06182A;
+  --sos-navy-light: #0D2943;
+  --sos-red: #D91F2D;
+  --sos-red-light: #FFE9EB;
+  --sos-white: #FFFFFF;
+  --sos-gray: #F5F7F9;
+  --sos-text: #17212B;
+}
+
+body {
+  background: var(--sos-gray);
+  color: var(--sos-text);
+}
+
+header {
+  background: var(--sos-navy) !important;
+  color: var(--sos-white) !important;
+  border-color: var(--sos-navy) !important;
+}
+
+header a,
+header nav a,
+header .brand,
+header .brand-name {
+  color: var(--sos-white) !important;
+}
+
+footer {
+  background: var(--sos-navy) !important;
+  color: var(--sos-white) !important;
+}
+
+footer a {
+  color: var(--sos-white) !important;
+}
+
+button,
+.btn,
+.primary-button,
+.cta-button,
+.connect-button,
+.connector-button {
+  background: var(--sos-red) !important;
+  border-color: var(--sos-red) !important;
+  color: var(--sos-white) !important;
+}
+
+button:hover,
+.btn:hover,
+.primary-button:hover,
+.cta-button:hover,
+.connect-button:hover,
+.connector-button:hover {
+  background: #C81C29 !important;
+}
+
+.badge,
+.eyebrow,
+.section-eyebrow {
+  color: var(--sos-red) !important;
+}
+
+a {
+  color: var(--sos-navy);
+}
+
+.card,
+.panel,
+.section-card {
+  background: var(--sos-white);
+}
+
+:focus-visible {
+  outline: 3px solid var(--sos-red) !important;
+  outline-offset: 3px;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+    <a class="brand" href="/index.html" aria-label="SOS Connect home">
+        <img
+            src="/images/sos-connect-logo.png"
+            alt="SOS Connect"
+        >
+
+        <span class="brand-name">SOS Connect</span>
+    </a>
+
+    <nav aria-label="Main navigation">
+        <a href="/index.html">Home</a>
+        <a href="/request-help.html">Get Help</a>
+        <a href="/dashboard.html">Dashboard</a>
+        <a href="/profile.html">Profile</a>
+    </nav>
+</header>
+
+<main>
+
+    <!-- EMPTY STATE -->
+    <section
+        id="emptyState"
+        class="empty-state"
+        aria-live="polite"
+    >
+        <div class="empty-icon">!</div>
+
+        <h2>No Active Connection</h2>
+
+        <p>
+            There isn't an active help connection right now.
+            Go back to your dashboard to find an SOS request.
+        </p>
+
+        <a
+            class="home-button"
+            href="/dashboard.html"
+        >
+            BACK TO DASHBOARD
+        </a>
+    </section>
+
+
+    <!-- ACTIVE CONNECTION -->
+    <div id="connectionContent" style="display: none;">
+
+        <section class="hero">
+            <div class="eyebrow">
+                ACTIVE CONNECTION
+            </div>
+
+            <h1>
+                You're Connected.
+            </h1>
+
+            <p>
+                You've accepted a request for help.
+                Here's everything you need to complete the connection.
+            </p>
+        </section>
+
+
+        <section class="status-banner">
+            <div class="status-icon">
+                ✓
+            </div>
+
+            <div>
+                <strong>
+                    Connection Accepted
+                </strong>
+
+                <span>
+                    The person requesting help knows you're on your way.
+                </span>
+            </div>
+        </section>
+
+
+        <div class="content-grid">
+
+            <!-- LEFT COLUMN -->
+            <div>
+
+                <!-- REQUESTER -->
+                <section class="card">
+
+                    <h2>
+                        Person Requesting Help
+                    </h2>
+
+                    <div class="person">
+
+                        <img
+                            id="requesterPhoto"
+                            class="person-photo"
+                            src="/images/ava.jpg"
+                            alt="Requester profile photo"
+                        >
+
+                        <div>
+                            <div
+                                id="requesterName"
+                                class="person-name"
+                            >
+                                Ava Thompson
+                            </div>
+
+                            <div class="person-role">
+                                Community member requesting help
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div
+                        id="requestType"
+                        class="request-type"
+                    >
+                        Rides & Escorts
+                    </div>
+
+                    <div
+                        id="requestTitle"
+                        class="request-title"
+                    >
+                        Medical appointment ride
+                    </div>
+
+                    <div
+                        id="requestDescription"
+                        class="request-description"
+                    >
+                        I need a ride to a medical appointment and help getting inside.
+                    </div>
+
+                    <div class="detail-list">
+
+                        <div class="detail">
+                            <span class="detail-label">
+                                Location
+                            </span>
+
+                            <span
+                                id="requestLocation"
+                                class="detail-value"
+                            >
+                                Philadelphia, PA
+                            </span>
+                        </div>
+
+                        <div class="detail">
+                            <span class="detail-label">
+                                Distance
+                            </span>
+
+                            <span
+                                id="requestDistance"
+                                class="detail-value"
+                            >
+                                1.8 miles
+                            </span>
+                        </div>
+
+                        <div class="detail">
+                            <span class="detail-label">
+                                Request Status
+                            </span>
+
+                            <span
+                                id="requestStatus"
+                                class="detail-value"
+                            >
+                                ACCEPTED
+                            </span>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- CONNECTOR -->
+                <section class="card connector-card">
+
+                    <h2>
+                        Your Connector Profile
+                    </h2>
+
+                    <p
+                        id="connectorName"
+                        style="
+                            font-size:22px;
+                            font-weight:800;
+                            margin:0 0 8px;
+                        "
+                    >
+                        Marcus Johnson
+                    </p>
+
+                    <p
+                        id="connectorBio"
+                        class="muted"
+                        style="
+                            line-height:1.6;
+                            margin:0;
+                        "
+                    >
+                        I enjoy helping people in my community whenever I can.
+                    </p>
+
+                    <div class="connector-stat-grid">
+
+                        <div class="connector-stat">
+                            <strong id="connectorRating">
+                                4.9
+                            </strong>
+
+                            <span>
+                                STAR RATING
+                            </span>
+                        </div>
+
+                        <div class="connector-stat">
+                            <strong id="connectorReviews">
+                                127
+                            </strong>
+
+                            <span>
+                                REVIEWS
+                            </span>
+                        </div>
+
+                        <div class="connector-stat">
+                            <strong id="connectorConnections">
+                                127
+                            </strong>
+
+                            <span>
+                                CONNECTIONS
+                            </span>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ACTIONS -->
+                <section class="card actions">
+
+                    <h2>
+                        Finish the Connection
+                    </h2>
+
+                    <p class="muted">
+                        Once you've provided the requested help,
+                        mark this connection as complete.
+                    </p>
+
+                    <button
+                        id="completeButton"
+                        class="complete-button"
+                        type="button"
+                    >
+                        MARK HELP COMPLETED
+                    </button>
+
+                    <button
+                        id="backButton"
+                        class="secondary-button"
+                        type="button"
+                    >
+                        BACK TO DASHBOARD
+                    </button>
+
+                    <div
+                        id="completedMessage"
+                        class="completed"
+                        aria-live="polite"
+                    >
+                        <h3>
+                            Help Completed!
+                        </h3>
+
+                        <p>
+                            Great job. This connection has been completed.
+                            Your Connector availability is now back on.
+                        </p>
+
+                        <button
+                            id="dashboardButton"
+                            class="complete-button"
+                            type="button"
+                        >
+                            RETURN TO DASHBOARD
+                        </button>
+                    </div>
+
+                </section>
+
+            </div>
+
+
+            <!-- RIGHT COLUMN -->
+            <div>
+
+                <!-- MAP -->
+                <section class="card map-card">
+
+                    <div class="map-header">
+
+                        <h2>
+                            Getting There
+                        </h2>
+
+                        <p>
+                            Your approximate connection location.
+                        </p>
+
+                    </div>
+
+                    <div
+                        id="map"
+                        aria-label="Map showing the connection location"
+                    ></div>
+
+                    <div class="map-footer">
+                        The map shows an approximate location.
+                        Exact details can be shared when appropriate.
+                    </div>
+
+                </section>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<script>
+    /*
+     * SOS CONNECT
+     * Active Connection Page
+     *
+     * This page works with the demo data stored
+     * in localStorage by dashboard.html.
+     */
+
+
+    // ============================================
+    // VARIABLES
+    // ============================================
+
+    let activeConnection = null;
+    let currentRequest = null;
+    let requester = null;
+    let connector = null;
+    let map = null;
+
+
+    // ============================================
+    // SAFE LOCAL STORAGE READER
+    // ============================================
+
+    function readStorage(key, fallback) {
+
+        try {
+
+            const value = localStorage.getItem(key);
+
+            if (!value) {
+                return fallback;
+            }
+
+            return JSON.parse(value);
+
+        } catch (error) {
+
+            console.error(
+                "Could not read localStorage:",
+                key,
+                error
+            );
+
+            return fallback;
+        }
+    }
+
+
+    // ============================================
+    // LOAD ACTIVE CONNECTION
+    // ============================================
+
+    function loadActiveConnection() {
+
+        /*
+         * First try the new demo-data system.
+         */
+        if (
+            typeof getDemoActiveConnection === "function"
+        ) {
+
+            activeConnection =
+                getDemoActiveConnection();
+
+        }
+
+
+        /*
+         * If that isn't available, read directly
+         * from localStorage.
+         */
+        if (!activeConnection) {
+
+            activeConnection =
+                readStorage(
+                    "sosDemoActiveConnection",
+                    null
+                );
+
+        }
+
+
+        /*
+         * Make sure we actually have an accepted
+         * connection.
+         */
+        if (
+            !activeConnection ||
+            activeConnection.status !== "ACCEPTED"
+        ) {
+
+            showEmptyState();
+
+            return false;
+        }
+
+
+        return true;
+    }
+
+
+    // ============================================
+    // LOAD REQUEST
+    // ============================================
+
+    function loadRequest() {
+
+        if (!activeConnection.requestId) {
+
+            console.error(
+                "Active connection has no requestId."
+            );
+
+            return false;
+        }
+
+
+        /*
+         * Use demo-data.js if available.
+         */
+        if (
+            typeof getDemoRequestById === "function"
+        ) {
+
+            currentRequest =
+                getDemoRequestById(
+                    activeConnection.requestId
+                );
+
+        }
+
+
+        /*
+         * Fallback to localStorage.
+         */
+        if (!currentRequest) {
+
+            const requests =
+                readStorage(
+                    "sosDemoRequests",
+                    []
+                );
+
+            currentRequest =
+                requests.find(
+                    request =>
+                        request.id ===
+                        activeConnection.requestId
+                );
+
+        }
+
+
+        if (!currentRequest) {
+
+            console.error(
+                "Could not find request:",
+                activeConnection.requestId
+            );
+
+            return false;
+        }
+
+
+        return true;
+    }
+
+
+    // ============================================
+    // LOAD REQUESTER
+    // ============================================
+
+    function loadRequester() {
+
+        const requesterId =
+            activeConnection.requesterId ||
+            currentRequest.requesterId;
+
+
+        /*
+         * New helper function if demo-data.js has it.
+         */
+        if (
+            typeof getDemoRequesterById === "function"
+        ) {
+
+            requester =
+                getDemoRequesterById(
+                    requesterId
+                );
+
+        }
+
+
+        /*
+         * Fallback so the page does not crash
+         * if the helper isn't present yet.
+         */
+        if (!requester) {
+
+            const requesters =
+                readStorage(
+                    "sosDemoRequesters",
+                    []
+                );
+
+            requester =
+                requesters.find(
+                    person =>
+                        person.id === requesterId
+                );
+
+        }
+
+
+        /*
+         * Last fallback using request information.
+         */
+        if (!requester) {
+
+            requester = {
+
+                firstName:
+                    currentRequest.requesterName
+                        ? currentRequest.requesterName.split(" ")[0]
+                        : "Community",
+
+                lastName:
+                    currentRequest.requesterName
+                        ? currentRequest.requesterName
+                            .split(" ")
+                            .slice(1)
+                            .join(" ")
+                        : "Member",
+
+                fullName:
+                    currentRequest.requesterName ||
+                    "Community Member",
+
+                photo:
+                    "/images/ava.jpg"
+
+            };
+
+        }
+
+
+        return true;
+    }
+
+
+    // ============================================
+    // LOAD CONNECTOR
+    // ============================================
+
+    function loadConnector() {
+
+        const connectorId =
+            activeConnection.connectorId;
+
+
+        /*
+         * Use demo-data.js if available.
+         */
+        if (
+            typeof getDemoConnectorById === "function"
+        ) {
+
+            connector =
+                getDemoConnectorById(
+                    connectorId
+                );
+
+        }
+
+
+        /*
+         * Fallback to localStorage.
+         */
+        if (!connector) {
+
+            const connectors =
+                readStorage(
+                    "sosDemoConnectors",
+                    []
+                );
+
+            connector =
+                connectors.find(
+                    person =>
+                        person.id === connectorId
+                );
+
+        }
+
+
+        /*
+         * Final fallback.
+         */
+        if (!connector) {
+
+            connector = {
+
+                id: connectorId,
+
+                firstName: "Your",
+
+                lastName: "Connector",
+
+                fullName: "Your Connector",
+
+                rating: 5.0,
+
+                reviews: 0,
+
+                completedConnections: 0,
+
+                bio:
+                    "A community member ready to help."
+
+            };
+
+        }
+
+
+        return true;
+    }
+
+
+    // ============================================
+    // RENDER PAGE
+    // ============================================
+
+    function renderPage() {
+
+        document.getElementById(
+            "requesterName"
+        ).textContent =
+            requester.fullName ||
+            `${requester.firstName || ""} ${requester.lastName || ""}`.trim();
+
+
+        document.getElementById(
+            "requestType"
+        ).textContent =
+            currentRequest.type ||
+            "Help Request";
+
+
+        document.getElementById(
+            "requestTitle"
+        ).textContent =
+            currentRequest.title ||
+            "SOS Help Request";
+
+
+        document.getElementById(
+            "requestDescription"
+        ).textContent =
+            currentRequest.description ||
+            "A community member requested help.";
+
+
+        document.getElementById(
+            "requestLocation"
+        ).textContent =
+            currentRequest.location ||
+            "Approximate location";
+
+
+        document.getElementById(
+            "requestDistance"
+        ).textContent =
+            currentRequest.distance
+                ? `${currentRequest.distance} miles`
+                : "Nearby";
+
+
+        document.getElementById(
+            "requestStatus"
+        ).textContent =
+            currentRequest.status ||
+            "ACCEPTED";
+
+
+        /*
+         * Requester photo.
+         */
+        if (requester.photo) {
+
+            document.getElementById(
+                "requesterPhoto"
+            ).src =
+                requester.photo;
+
+        }
+
+
+        /*
+         * Connector information.
+         */
+        document.getElementById(
+            "connectorName"
+        ).textContent =
+            connector.fullName ||
+            `${connector.firstName || ""} ${connector.lastName || ""}`.trim();
+
+
+        document.getElementById(
+            "connectorBio"
+        ).textContent =
+            connector.bio ||
+            "Helping people in the community.";
+
+
+        document.getElementById(
+            "connectorRating"
+        ).textContent =
+            Number(connector.rating || 0).toFixed(1);
+
+
+        document.getElementById(
+            "connectorReviews"
+        ).textContent =
+            connector.reviews || 0;
+
+
+        document.getElementById(
+            "connectorConnections"
+        ).textContent =
+            connector.completedConnections || 0;
+
+
+        document.getElementById(
+            "connectionContent"
+        ).style.display =
+            "block";
+
+    }
+
+
+    // ============================================
+    // SHOW EMPTY STATE
+    // ============================================
+
+    function showEmptyState() {
+
+        document.getElementById(
+            "emptyState"
+        ).classList.add("show");
+
+        document.getElementById(
+            "connectionContent"
+        ).style.display =
+            "none";
+    }
+
+
+    // ============================================
+    // CREATE MAP
+    // ============================================
+
+    function createMap() {
+
+        /*
+         * Use the request location first.
+         */
+        let latitude =
+            Number(currentRequest.latitude);
+
+        let longitude =
+            Number(currentRequest.longitude);
+
+
+        /*
+         * If request coordinates are missing,
+         * use the requester coordinates.
+         */
+        if (
+            !latitude ||
+            !longitude
+        ) {
+
+            latitude =
+                Number(
+                    activeConnection.requesterLocation?.latitude
+                );
+
+            longitude =
+                Number(
+                    activeConnection.requesterLocation?.longitude
+                );
+
+        }
+
+
+        /*
+         * Final Philadelphia fallback for demo.
+         */
+        if (
+            !latitude ||
+            !longitude
+        ) {
+
+            latitude = 39.9526;
+            longitude = -75.1652;
+
+        }
+
+
+        map =
+            new maplibregl.Map({
+
+                container: "map",
+
+                style:
+                    "https://tiles.openfreemap.org/styles/liberty",
+
+                center: [
+                    longitude,
+                    latitude
+                ],
+
+                zoom: 12
+
+            });
+
+
+        map.addControl(
+            new maplibregl.NavigationControl(),
+            "top-right"
+        );
+
+
+        /*
+         * Requester marker.
+         */
+        const requesterMarker =
+            document.createElement("div");
+
+        requesterMarker.style.width = "24px";
+        requesterMarker.style.height = "24px";
+        requesterMarker.style.borderRadius = "50%";
+        requesterMarker.style.background = "#D91F2D";
+        requesterMarker.style.border = "4px solid white";
+        requesterMarker.style.boxShadow =
+            "0 2px 8px rgba(0,0,0,.3)";
+
+
+        new maplibregl.Marker(
+            requesterMarker
+        )
+            .setLngLat([
+                longitude,
+                latitude
+            ])
+            .setPopup(
+                new maplibregl.Popup({
+                    offset: 25
+                }).setHTML(
+                    `<strong>${escapeHtml(
+                        requester.fullName ||
+                        "Requester"
+                    )}</strong><br>Help requested here`
+                )
+            )
+            .addTo(map);
+
+
+        /*
+         * Connector marker.
+         */
+        const connectorLatitude =
+            Number(
+                activeConnection.connectorLocation?.latitude
+            ) || latitude;
+
+
+        const connectorLongitude =
+            Number(
+                activeConnection.connectorLocation?.longitude
+            ) || longitude;
+
+
+        const connectorMarker =
+            document.createElement("div");
+
+        connectorMarker.style.width = "22px";
+        connectorMarker.style.height = "22px";
+        connectorMarker.style.borderRadius = "50%";
+        connectorMarker.style.background = "#06182A";
+        connectorMarker.style.border = "4px solid white";
+        connectorMarker.style.boxShadow =
+            "0 2px 8px rgba(0,0,0,.3)";
+
+
+        new maplibregl.Marker(
+            connectorMarker
+        )
+            .setLngLat([
+                connectorLongitude,
+                connectorLatitude
+            ])
+            .setPopup(
+                new maplibregl.Popup({
+                    offset: 25
+                }).setHTML(
+                    `<strong>${escapeHtml(
+                        connector.fullName ||
+                        "Connector"
+                    )}</strong><br>Your location`
+                )
+            )
+            .addTo(map);
+
+
+        /*
+         * Fit the map around both points.
+         */
+        const bounds =
+            new maplibregl.LngLatBounds();
+
+        bounds.extend([
+            longitude,
+            latitude
+        ]);
+
+        bounds.extend([
+            connectorLongitude,
+            connectorLatitude
+        ]);
+
+
+        map.fitBounds(
+            bounds,
+            {
+                padding: 70,
+                maxZoom: 14
+            }
+        );
+
+    }
+
+
+    // ============================================
+    // ESCAPE HTML
+    // ============================================
+
+    function escapeHtml(value) {
+
+        return String(value)
+            .replaceAll("&", "&amp;")
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;")
+            .replaceAll('"', "&quot;")
+            .replaceAll("'", "&#039;");
+
+    }
+
+
+    // ============================================
+    // COMPLETE CONNECTION
+    // ============================================
+
+    function completeConnection() {
+
+        if (!activeConnection) {
+            return;
+        }
+
+
+        /*
+         * Get requests.
+         */
+        const requests =
+            readStorage(
+                "sosDemoRequests",
+                []
+            );
+
+
+        /*
+         * Find the active request.
+         */
+        const request =
+            requests.find(
+                item =>
+                    item.id ===
+                    activeConnection.requestId
+            );
+
+
+        if (request) {
+
+            request.status =
+                "COMPLETED";
+
+            request.completedAt =
+                new Date().toISOString();
+
+        }
+
+
+        /*
+         * Save updated requests.
+         */
+        localStorage.setItem(
+            "sosDemoRequests",
+            JSON.stringify(requests)
+        );
+
+
+        /*
+         * Update Connector.
+         */
+        const connectors =
+            readStorage(
+                "sosDemoConnectors",
+                []
+            );
+
+
+        const currentConnector =
+            connectors.find(
+                person =>
+                    person.id ===
+                    activeConnection.connectorId
+            );
+
+
+        if (currentConnector) {
+
+            currentConnector.available = true;
+
+            currentConnector.completedConnections =
+                Number(
+                    currentConnector.completedConnections || 0
+                ) + 1;
+
+        }
+
+
+        localStorage.setItem(
+            "sosDemoConnectors",
+            JSON.stringify(connectors)
+        );
+
+
+        /*
+         * Clear active connection.
+         */
+        localStorage.removeItem(
+            "sosDemoActiveConnection"
+        );
+
+
+        localStorage.setItem(
+            "sosActiveConnection",
+            "false"
+        );
+
+
+        /*
+         * Update screen.
+         */
+        document.getElementById(
+            "completeButton"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "completedMessage"
+        ).classList.add("show");
+
+
+        document.getElementById(
+            "requestStatus"
+        ).textContent =
+            "COMPLETED";
+
+    }
+
+
+    // ============================================
+    // BUTTONS
+    // ============================================
+
+    document.getElementById(
+        "completeButton"
+    ).addEventListener(
+        "click",
+        completeConnection
+    );
+
+
+    document.getElementById(
+        "backButton"
+    ).addEventListener(
+        "click",
+        function () {
+
+            window.location.href =
+                "/dashboard.html";
+
+        }
+    );
+
+
+    document.getElementById(
+        "dashboardButton"
+    ).addEventListener(
+        "click",
+        function () {
+
+            window.location.href =
+                "/dashboard.html";
+
+        }
+    );
+
+
+    // ============================================
+    // START PAGE
+    // ============================================
+
+    function startPage() {
+
+        /*
+         * Check for active connection.
+         */
+        if (!loadActiveConnection()) {
+            return;
+        }
+
+
+        /*
+         * Load request.
+         */
+        if (!loadRequest()) {
+
+            showEmptyState();
+
+            return;
+        }
+
+
+        /*
+         * Load requester.
+         */
+        loadRequester();
+
+
+        /*
+         * Load Connector.
+         */
+        loadConnector();
+
+
+        /*
+         * Put information onto page.
+         */
+        renderPage();
+
+
+        /*
+         * Build map after page is visible.
+         */
+        setTimeout(
+            createMap,
+            100
+        );
+
+    }
+
+
+    startPage();
+
+</script>
+
+</body>
+</html>

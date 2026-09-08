@@ -1,0 +1,2308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>SOS Connect | Request Status</title>
+
+
+    <!-- Google Fonts -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- MapLibre -->
+
+    <link
+        href="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.css"
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+        :root {
+            --navy: #06182A;
+            --navy-light: #0D2943;
+
+            --red: #D91F2D;
+            --red-light: #FFE9EB;
+
+            --white: #FFFFFF;
+            --gray: #F5F7F9;
+
+            --text: #17212B;
+            --muted: #66727E;
+
+            --border: #DCE2E7;
+
+            --gold: #E6A700;
+        }
+
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+            font-family:
+                "Public Sans",
+                sans-serif;
+
+            background:
+                var(--gray);
+
+            color:
+                var(--text);
+
+            line-height:
+                1.6;
+        }
+
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        button,
+        textarea {
+            font: inherit;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            background:
+                var(--navy);
+
+            color:
+                white;
+        }
+
+
+        .nav {
+            max-width:
+                1180px;
+
+            margin:
+                auto;
+
+            padding:
+                18px 24px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                30px;
+        }
+
+
+        .logo img {
+            width:
+                155px;
+
+            display:
+                block;
+        }
+
+
+        .nav-links {
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                25px;
+        }
+
+
+        .nav-links a {
+            color:
+                white;
+
+            font-size:
+                14px;
+
+            font-weight:
+                600;
+        }
+
+
+        .nav-links a:hover {
+            color:
+                #FFD8DC;
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        main {
+            max-width:
+                1100px;
+
+            margin:
+                auto;
+
+            padding:
+                50px 24px 80px;
+        }
+
+
+        .page-heading {
+            margin-bottom:
+                25px;
+        }
+
+
+        .eyebrow {
+            font-family:
+                "IBM Plex Mono",
+                monospace;
+
+            color:
+                var(--red);
+
+            font-size:
+                12px;
+
+            font-weight:
+                600;
+
+            letter-spacing:
+                1.5px;
+
+            text-transform:
+                uppercase;
+
+            margin-bottom:
+                9px;
+        }
+
+
+        h1,
+        h2,
+        h3 {
+            font-family:
+                "Fraunces",
+                serif;
+
+            color:
+                var(--navy);
+        }
+
+
+        h1 {
+            font-size:
+                clamp(38px, 6vw, 58px);
+
+            line-height:
+                1.05;
+
+            margin-bottom:
+                10px;
+        }
+
+
+        .page-heading p {
+            color:
+                var(--muted);
+
+            font-size:
+                16px;
+
+            max-width:
+                650px;
+        }
+
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .status-card {
+            background:
+                white;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                18px;
+
+            padding:
+                22px 25px;
+
+            margin-bottom:
+                20px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                15px;
+        }
+
+
+        .status-icon {
+            width:
+                45px;
+
+            height:
+                45px;
+
+            border-radius:
+                50%;
+
+            background:
+                var(--red-light);
+
+            color:
+                var(--red);
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            font-weight:
+                700;
+
+            font-size:
+                20px;
+
+            flex-shrink:
+                0;
+        }
+
+
+        .status-card strong {
+            display:
+                block;
+
+            color:
+                var(--navy);
+
+            font-size:
+                17px;
+        }
+
+
+        .status-card span {
+            color:
+                var(--muted);
+
+            font-size:
+                13px;
+        }
+
+
+        /* =========================
+           MAP
+        ========================= */
+
+        .map-card {
+            background:
+                white;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                18px;
+
+            padding:
+                12px;
+
+            margin-bottom:
+                20px;
+
+            box-shadow:
+                0 5px 20px rgba(6, 24, 42, 0.05);
+        }
+
+
+        #map {
+            width:
+                100%;
+
+            height:
+                450px;
+
+            border-radius:
+                12px;
+
+            overflow:
+                hidden;
+        }
+
+
+        /* =========================
+           MAP MARKERS
+        ========================= */
+
+        .sos-marker {
+            width:
+                42px;
+
+            height:
+                42px;
+
+            border-radius:
+                50%;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            color:
+                white;
+
+            font-weight:
+                700;
+
+            font-size:
+                17px;
+
+            border:
+                4px solid white;
+
+            box-shadow:
+                0 3px 12px rgba(0,0,0,.25);
+        }
+
+
+        .requester-marker {
+            background:
+                var(--red);
+        }
+
+
+        .connector-marker {
+            background:
+                var(--navy);
+        }
+
+
+        /* =========================
+           DETAILS
+        ========================= */
+
+        .details-grid {
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap:
+                20px;
+        }
+
+
+        .card {
+            background:
+                white;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                18px;
+
+            padding:
+                28px;
+
+            box-shadow:
+                0 5px 20px rgba(6, 24, 42, 0.05);
+        }
+
+
+        .card h2 {
+            font-size:
+                28px;
+
+            margin-bottom:
+                8px;
+        }
+
+
+        .card-intro {
+            color:
+                var(--muted);
+
+            font-size:
+                14px;
+
+            margin-bottom:
+                22px;
+        }
+
+
+        /* =========================
+           WAITING
+        ========================= */
+
+        .waiting-card {
+            background:
+                var(--navy);
+
+            color:
+                white;
+
+            border-radius:
+                18px;
+
+            padding:
+                30px;
+
+            text-align:
+                center;
+
+            margin-bottom:
+                20px;
+        }
+
+
+        .waiting-card h2 {
+            color:
+                white;
+
+            font-size:
+                30px;
+
+            margin-bottom:
+                8px;
+        }
+
+
+        .waiting-card p {
+            color:
+                #C8D3DC;
+
+            max-width:
+                600px;
+
+            margin:
+                auto;
+        }
+
+
+        .loading-dots {
+            margin-top:
+                20px;
+
+            display:
+                flex;
+
+            justify-content:
+                center;
+
+            gap:
+                7px;
+        }
+
+
+        .loading-dots span {
+            width:
+                9px;
+
+            height:
+                9px;
+
+            border-radius:
+                50%;
+
+            background:
+                var(--red);
+
+            animation:
+                pulse 1.2s infinite;
+        }
+
+
+        .loading-dots span:nth-child(2) {
+            animation-delay:
+                .2s;
+        }
+
+
+        .loading-dots span:nth-child(3) {
+            animation-delay:
+                .4s;
+        }
+
+
+        @keyframes pulse {
+
+            0% {
+                opacity:
+                    .3;
+
+                transform:
+                    scale(.8);
+            }
+
+            50% {
+                opacity:
+                    1;
+
+                transform:
+                    scale(1.2);
+            }
+
+            100% {
+                opacity:
+                    .3;
+
+                transform:
+                    scale(.8);
+            }
+
+        }
+
+
+        /* =========================
+           CONNECTOR
+        ========================= */
+
+        .connector {
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                15px;
+        }
+
+
+        .connector-photo {
+            width:
+                65px;
+
+            height:
+                65px;
+
+            border-radius:
+                50%;
+
+            background:
+                var(--navy-light);
+
+            color:
+                white;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            font-family:
+                "Fraunces",
+                serif;
+
+            font-size:
+                25px;
+
+            overflow:
+                hidden;
+
+            flex-shrink:
+                0;
+        }
+
+
+        .connector-photo img {
+            width:
+                100%;
+
+            height:
+                100%;
+
+            object-fit:
+                cover;
+        }
+
+
+        .connector h3 {
+            font-size:
+                22px;
+
+            margin-bottom:
+                2px;
+        }
+
+
+        .connector-info {
+            color:
+                var(--muted);
+
+            font-size:
+                13px;
+        }
+
+
+        .stars {
+            color:
+                var(--gold);
+
+            letter-spacing:
+                1px;
+        }
+
+
+        /* =========================
+           REQUEST DETAILS
+        ========================= */
+
+        .request-row {
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            padding:
+                13px 0;
+
+            border-bottom:
+                1px solid var(--border);
+
+            gap:
+                20px;
+        }
+
+
+        .request-row:last-child {
+            border-bottom:
+                none;
+        }
+
+
+        .request-label {
+            color:
+                var(--muted);
+
+            font-size:
+                13px;
+        }
+
+
+        .request-value {
+            color:
+                var(--navy);
+
+            font-size:
+                14px;
+
+            font-weight:
+                600;
+
+            text-align:
+                right;
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .contact-button {
+            width:
+                100%;
+
+            margin-top:
+                20px;
+
+            padding:
+                14px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                9px;
+
+            background:
+                white;
+
+            color:
+                var(--navy);
+
+            font-weight:
+                700;
+
+            cursor:
+                pointer;
+        }
+
+
+        .contact-button:hover {
+            background:
+                var(--gray);
+        }
+
+
+        /* =========================
+           REVIEW
+        ========================= */
+
+        .review-card {
+            display:
+                none;
+
+            margin-top:
+                20px;
+        }
+
+
+        .review-card.visible {
+            display:
+                block;
+        }
+
+
+        .review-card textarea {
+            width:
+                100%;
+
+            min-height:
+                120px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                9px;
+
+            padding:
+                13px;
+
+            resize:
+                vertical;
+
+            outline:
+                none;
+        }
+
+
+        .review-card textarea:focus {
+            border-color:
+                var(--red);
+
+            box-shadow:
+                0 0 0 3px var(--red-light);
+        }
+
+
+        .review-stars {
+            display:
+                flex;
+
+            gap:
+                6px;
+
+            margin:
+                15px 0;
+        }
+
+
+        .review-star {
+            border:
+                none;
+
+            background:
+                transparent;
+
+            color:
+                #C8CDD2;
+
+            font-size:
+                40px;
+
+            cursor:
+                pointer;
+
+            padding:
+                0;
+        }
+
+
+        .review-star.selected {
+            color:
+                var(--gold);
+        }
+
+
+        .submit-review {
+            width:
+                100%;
+
+            border:
+                none;
+
+            border-radius:
+                9px;
+
+            background:
+                var(--red);
+
+            color:
+                white;
+
+            padding:
+                15px;
+
+            font-weight:
+                700;
+
+            cursor:
+                pointer;
+
+            margin-top:
+                15px;
+        }
+
+
+        .submit-review:hover {
+            background:
+                #B91926;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background:
+                var(--navy);
+
+            color:
+                white;
+
+            padding:
+                35px 24px;
+        }
+
+
+        .footer-inner {
+            max-width:
+                1180px;
+
+            margin:
+                auto;
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            gap:
+                25px;
+        }
+
+
+        footer p {
+            color:
+                #B9C5CF;
+
+            font-size:
+                13px;
+        }
+
+
+        footer a {
+            color:
+                white;
+
+            font-size:
+                13px;
+
+            font-weight:
+                600;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 750px) {
+
+            .details-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            #map {
+                height:
+                    350px;
+            }
+
+
+            .nav {
+                flex-direction:
+                    column;
+            }
+
+
+            .nav-links {
+                flex-wrap:
+                    wrap;
+
+                justify-content:
+                    center;
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            main {
+                padding:
+                    40px 16px 60px;
+            }
+
+
+            #map {
+                height:
+                    300px;
+            }
+
+
+            .card {
+                padding:
+                    22px;
+            }
+
+
+            .footer-inner {
+                flex-direction:
+                    column;
+
+                text-align:
+                    center;
+            }
+
+        }
+
+    </style>
+
+
+<style>
+/* SOS CONNECT BRAND LAYER */
+:root {
+  --sos-navy: #06182A;
+  --sos-navy-light: #0D2943;
+  --sos-red: #D91F2D;
+  --sos-red-light: #FFE9EB;
+  --sos-white: #FFFFFF;
+  --sos-gray: #F5F7F9;
+  --sos-text: #17212B;
+}
+
+body {
+  background: var(--sos-gray);
+  color: var(--sos-text);
+}
+
+header {
+  background: var(--sos-navy) !important;
+  color: var(--sos-white) !important;
+  border-color: var(--sos-navy) !important;
+}
+
+header a,
+header nav a,
+header .brand,
+header .brand-name {
+  color: var(--sos-white) !important;
+}
+
+footer {
+  background: var(--sos-navy) !important;
+  color: var(--sos-white) !important;
+}
+
+footer a {
+  color: var(--sos-white) !important;
+}
+
+button,
+.btn,
+.primary-button,
+.cta-button,
+.connect-button,
+.connector-button {
+  background: var(--sos-red) !important;
+  border-color: var(--sos-red) !important;
+  color: var(--sos-white) !important;
+}
+
+button:hover,
+.btn:hover,
+.primary-button:hover,
+.cta-button:hover,
+.connect-button:hover,
+.connector-button:hover {
+  background: #C81C29 !important;
+}
+
+.badge,
+.eyebrow,
+.section-eyebrow {
+  color: var(--sos-red) !important;
+}
+
+a {
+  color: var(--sos-navy);
+}
+
+.card,
+.panel,
+.section-card {
+  background: var(--sos-white);
+}
+
+:focus-visible {
+  outline: 3px solid var(--sos-red) !important;
+  outline-offset: 3px;
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <nav class="nav">
+
+        <a
+            class="logo"
+            href="/"
+        >
+
+            <img
+                src="/images/sos-connect-logo.png"
+                alt="SOS Connect"
+            >
+
+        </a>
+
+
+        <div class="nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/request-help.html">
+                Get Help
+            </a>
+
+            <a href="/dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="/profile.html">
+                Profile
+            </a>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main>
+
+
+    <section class="page-heading">
+
+        <div class="eyebrow">
+            YOUR SOS REQUEST
+        </div>
+
+        <h1>
+            We're Finding You Help.
+        </h1>
+
+        <p>
+            Your request has been sent to nearby
+            available Connectors.
+        </p>
+
+    </section>
+
+
+
+    <!-- STATUS -->
+
+    <div
+        class="status-card"
+        id="statusCard"
+    >
+
+        <div class="status-icon">
+            !
+        </div>
+
+        <div>
+
+            <strong id="statusTitle">
+                Searching for a Connector
+            </strong>
+
+            <span id="statusText">
+                We're checking for available Connectors nearby.
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- WAITING -->
+
+    <section
+        class="waiting-card"
+        id="waitingCard"
+    >
+
+        <h2>
+            Finding Someone Nearby
+        </h2>
+
+        <p>
+            Available Connectors will receive an SOS Ping
+            with the details of your request.
+        </p>
+
+
+        <div class="loading-dots">
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- MAP -->
+
+    <section class="map-card">
+
+        <div id="map"></div>
+
+    </section>
+
+
+
+    <!-- DETAILS -->
+
+    <div class="details-grid">
+
+
+        <!-- REQUEST -->
+
+        <section class="card">
+
+            <h2>
+                Your Request
+            </h2>
+
+            <p class="card-intro">
+                Here's what you sent to the community.
+            </p>
+
+
+            <div class="request-row">
+
+                <span class="request-label">
+                    Help Needed
+                </span>
+
+                <span
+                    class="request-value"
+                    id="requestType"
+                >
+                    Helping Hand
+                </span>
+
+            </div>
+
+
+            <div class="request-row">
+
+                <span class="request-label">
+                    Location
+                </span>
+
+                <span
+                    class="request-value"
+                    id="requestLocation"
+                >
+                    Philadelphia, PA
+                </span>
+
+            </div>
+
+
+            <div class="request-row">
+
+                <span class="request-label">
+                    Status
+                </span>
+
+                <span
+                    class="request-value"
+                    id="requestStatus"
+                >
+                    Searching
+                </span>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- CONNECTOR -->
+
+        <section
+            class="card"
+            id="connectorCard"
+            style="display: none;"
+        >
+
+            <h2>
+                Your Connector
+            </h2>
+
+            <p class="card-intro">
+                Someone has accepted your request.
+            </p>
+
+
+            <div class="connector">
+
+                <div
+                    class="connector-photo"
+                    id="connectorPhoto"
+                >
+                    C
+                </div>
+
+
+                <div>
+
+                    <h3 id="connectorName">
+                        Your Connector
+                    </h3>
+
+                    <div class="stars">
+                        ★★★★★
+                    </div>
+
+                    <div
+                        class="connector-info"
+                        id="connectorInfo"
+                    >
+                        5.0 · Connector
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="contact-button"
+                onclick="contactConnector()"
+            >
+                CONTACT CONNECTOR
+            </button>
+
+        </section>
+
+    </div>
+
+
+
+    <!-- REVIEW -->
+
+    <section
+        class="card review-card"
+        id="reviewCard"
+    >
+
+        <h2>
+            How Was Your Connection?
+        </h2>
+
+        <p class="card-intro">
+            Your review helps the community know which
+            Connectors they can trust.
+        </p>
+
+
+        <strong>
+            Rate your Connector
+        </strong>
+
+
+        <div class="review-stars">
+
+            <button
+                class="review-star"
+                data-rating="1"
+                onclick="selectRating(1)"
+            >
+                ★
+            </button>
+
+            <button
+                class="review-star"
+                data-rating="2"
+                onclick="selectRating(2)"
+            >
+                ★
+            </button>
+
+            <button
+                class="review-star"
+                data-rating="3"
+                onclick="selectRating(3)"
+            >
+                ★
+            </button>
+
+            <button
+                class="review-star"
+                data-rating="4"
+                onclick="selectRating(4)"
+            >
+                ★
+            </button>
+
+            <button
+                class="review-star"
+                data-rating="5"
+                onclick="selectRating(5)"
+            >
+                ★
+            </button>
+
+        </div>
+
+
+        <textarea
+            id="reviewText"
+            placeholder="Tell the community about your experience."
+        ></textarea>
+
+
+        <button
+            class="submit-review"
+            onclick="submitReview()"
+        >
+            SUBMIT REVIEW
+        </button>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="footer-inner">
+
+        <p>
+            SOS Connect — Help Is Closer Than You Think.
+        </p>
+
+        <a href="/">
+            Back to Home
+        </a>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =========================
+     MAPLIBRE
+========================= -->
+
+<script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
+
+
+<script>
+
+
+    // =========================================
+    // DEMO LOCATIONS
+    // =========================================
+
+    /*
+     * MapLibre uses:
+     *
+     * [longitude, latitude]
+     *
+     * Philadelphia
+     */
+
+    const requesterLocation = [
+
+        -75.1652,
+        39.9526
+
+    ];
+
+
+    const connectorStart = [
+
+        -75.1800,
+        39.9650
+
+    ];
+
+
+
+    // =========================================
+    // CREATE MAP
+    // =========================================
+
+    const map =
+
+        new maplibregl.Map({
+
+            container:
+                "map",
+
+            /*
+             * OpenFreeMap Positron
+             *
+             * Free.
+             * No API key.
+             * No account.
+             */
+
+            style:
+                "https://tiles.openfreemap.org/styles/positron",
+
+            center:
+                requesterLocation,
+
+            zoom:
+                13
+
+        });
+
+
+
+    // =========================================
+    // MAP CONTROLS
+    // =========================================
+
+    map.addControl(
+
+        new maplibregl.NavigationControl(),
+
+        "top-right"
+
+    );
+
+
+
+    // =========================================
+    // CREATE CUSTOM REQUESTER MARKER
+    // =========================================
+
+    const requesterElement =
+
+        document.createElement(
+            "div"
+        );
+
+
+    requesterElement.className =
+
+        "sos-marker requester-marker";
+
+
+    requesterElement.innerHTML =
+
+        "YOU";
+
+
+
+    const requesterMarker =
+
+        new maplibregl.Marker({
+
+            element:
+                requesterElement
+
+        })
+
+        .setLngLat(
+
+            requesterLocation
+
+        )
+
+        .setPopup(
+
+            new maplibregl.Popup()
+
+                .setHTML(
+
+                    "<strong>Your Location</strong>"
+
+                )
+
+        )
+
+        .addTo(map);
+
+
+
+    // =========================================
+    // CONNECTOR MARKER
+    // =========================================
+
+    let connectorMarker =
+
+        null;
+
+
+
+    // =========================================
+    // CONNECTOR ACCEPTED
+    // =========================================
+
+    function connectorAccepted() {
+
+
+        document.getElementById(
+            "waitingCard"
+        ).style.display =
+            "none";
+
+
+
+        document.getElementById(
+            "statusTitle"
+        ).textContent =
+            "Your Connector Is On The Way";
+
+
+
+        document.getElementById(
+            "statusText"
+        ).textContent =
+            "A Connector accepted your request.";
+
+
+
+        document.getElementById(
+            "requestStatus"
+        ).textContent =
+            "Connector accepted";
+
+
+
+        document.getElementById(
+            "connectorCard"
+        ).style.display =
+            "block";
+
+
+
+        // =====================================
+        // CONNECTOR PROFILE
+        // =====================================
+
+        const profile =
+
+            JSON.parse(
+
+                localStorage.getItem(
+                    "sosProfile"
+                )
+
+            ) || {};
+
+
+
+        document.getElementById(
+            "connectorName"
+        ).textContent =
+
+            profile.firstName
+
+                ? profile.firstName
+
+                : "Your Connector";
+
+
+
+        const rating =
+
+            profile.rating || 5.0;
+
+
+
+        const reviews =
+
+            profile.reviews || 0;
+
+
+
+        document.getElementById(
+            "connectorInfo"
+        ).textContent =
+
+            `${Number(rating).toFixed(1)} · ${reviews} reviews`;
+
+
+
+        // =====================================
+        // CONNECTOR PHOTO
+        // =====================================
+
+        if (profile.photo) {
+
+
+            document.getElementById(
+                "connectorPhoto"
+            ).innerHTML =
+
+                `
+
+                    <img
+
+                        src="${profile.photo}"
+
+                        alt="Connector profile photo"
+
+                    >
+
+                `;
+
+        }
+
+
+
+        // =====================================
+        // CUSTOM CONNECTOR MARKER
+        // =====================================
+
+        const connectorElement =
+
+            document.createElement(
+                "div"
+            );
+
+
+        connectorElement.className =
+
+            "sos-marker connector-marker";
+
+
+        connectorElement.innerHTML =
+
+            "SOS";
+
+
+
+        connectorMarker =
+
+            new maplibregl.Marker({
+
+                element:
+                    connectorElement
+
+            })
+
+            .setLngLat(
+
+                connectorStart
+
+            )
+
+            .setPopup(
+
+                new maplibregl.Popup()
+
+                    .setHTML(
+
+                        "<strong>Your Connector</strong><br>On the way"
+
+                    )
+
+            )
+
+            .addTo(map);
+
+
+
+        // =====================================
+        // FIT BOTH LOCATIONS
+        // =====================================
+
+        const bounds =
+
+            new maplibregl.LngLatBounds();
+
+
+
+        bounds.extend(
+
+            requesterLocation
+
+        );
+
+
+        bounds.extend(
+
+            connectorStart
+
+        );
+
+
+
+        map.fitBounds(
+
+            bounds,
+
+            {
+
+                padding:
+                    80
+
+            }
+
+        );
+
+
+
+        // =====================================
+        // START DEMO MOVEMENT
+        // =====================================
+
+        simulateConnectorMovement();
+
+    }
+
+
+
+    // =========================================
+    // SIMULATE CONNECTOR MOVEMENT
+    // =========================================
+
+    function simulateConnectorMovement() {
+
+
+        if (!connectorMarker) {
+
+            return;
+
+        }
+
+
+
+        const steps =
+
+            12;
+
+
+        let step =
+
+            0;
+
+
+
+        const interval =
+
+            setInterval(
+
+                function() {
+
+
+                    step++;
+
+
+
+                    const progress =
+
+                        step / steps;
+
+
+
+                    const currentLng =
+
+                        connectorStart[0] +
+
+                        (
+
+                            requesterLocation[0] -
+
+                            connectorStart[0]
+
+                        ) * progress;
+
+
+
+                    const currentLat =
+
+                        connectorStart[1] +
+
+                        (
+
+                            requesterLocation[1] -
+
+                            connectorStart[1]
+
+                        ) * progress;
+
+
+
+                    connectorMarker
+
+                        .setLngLat(
+
+                            [
+
+                                currentLng,
+
+                                currentLat
+
+                            ]
+
+                        );
+
+
+
+                    if (step >= steps) {
+
+
+                        clearInterval(
+
+                            interval
+
+                        );
+
+
+
+                        document.getElementById(
+                            "statusTitle"
+                        ).textContent =
+
+                            "Your Connector Has Arrived";
+
+
+
+                        document.getElementById(
+                            "statusText"
+                        ).textContent =
+
+                            "Your Connector is now at your location.";
+
+
+
+                        document.getElementById(
+                            "requestStatus"
+                        ).textContent =
+
+                            "Connector arrived";
+
+
+
+                        document.getElementById(
+                            "reviewCard"
+                        ).classList.add(
+                            "visible"
+                        );
+
+                    }
+
+
+                },
+
+                1500
+
+            );
+
+    }
+
+
+
+    // =========================================
+    // DEMO CONNECTION CHECK
+    // =========================================
+
+    const activeConnection =
+
+        localStorage.getItem(
+
+            "sosActiveConnection"
+
+        );
+
+
+
+    if (
+
+        activeConnection === "true"
+
+    ) {
+
+        connectorAccepted();
+
+    }
+
+
+
+    // =========================================
+    // CONTACT CONNECTOR
+    // =========================================
+
+    function contactConnector() {
+
+
+        alert(
+
+            "Messaging will be connected to the SOS Connect backend next."
+
+        );
+
+    }
+
+
+
+    // =========================================
+    // REVIEW
+    // =========================================
+
+    let selectedRating =
+
+        0;
+
+
+
+    function selectRating(rating) {
+
+
+        selectedRating =
+
+            rating;
+
+
+
+        const stars =
+
+            document.querySelectorAll(
+
+                ".review-star"
+
+            );
+
+
+
+        stars.forEach(
+
+            function(star) {
+
+
+                const value =
+
+                    Number(
+
+                        star.getAttribute(
+
+                            "data-rating"
+
+                        )
+
+                    );
+
+
+
+                if (
+
+                    value <= rating
+
+                ) {
+
+                    star.classList.add(
+                        "selected"
+                    );
+
+                } else {
+
+                    star.classList.remove(
+                        "selected"
+                    );
+
+                }
+
+            }
+
+        );
+
+    }
+
+
+
+    // =========================================
+    // SUBMIT REVIEW
+    // =========================================
+
+    function submitReview() {
+
+
+        if (
+
+            selectedRating === 0
+
+        ) {
+
+
+            alert(
+
+                "Please select a star rating."
+
+            );
+
+
+            return;
+
+        }
+
+
+
+        let profile =
+
+            JSON.parse(
+
+                localStorage.getItem(
+
+                    "sosProfile"
+
+                )
+
+            ) || {};
+
+
+
+        const oldRating =
+
+            Number(
+
+                profile.rating || 0
+
+            );
+
+
+
+        const oldReviews =
+
+            Number(
+
+                profile.reviews || 0
+
+            );
+
+
+
+        const oldConnections =
+
+            Number(
+
+                profile.connections || 0
+
+            );
+
+
+
+        const newReviews =
+
+            oldReviews + 1;
+
+
+
+        const newRating =
+
+            (
+
+                oldRating * oldReviews +
+
+                selectedRating
+
+            ) / newReviews;
+
+
+
+        profile.rating =
+
+            Number(
+
+                newRating.toFixed(1)
+
+            );
+
+
+
+        profile.reviews =
+
+            newReviews;
+
+
+
+        profile.connections =
+
+            oldConnections + 1;
+
+
+
+        localStorage.setItem(
+
+            "sosProfile",
+
+            JSON.stringify(profile)
+
+        );
+
+
+
+        localStorage.removeItem(
+
+            "sosActiveConnection"
+
+        );
+
+
+
+        document.getElementById(
+
+            "reviewCard"
+
+        ).innerHTML =
+
+            `
+
+                <h2>
+                    Thank You.
+                </h2>
+
+                <p class="card-intro">
+
+                    Your review has been submitted.
+
+                    Thank you for helping build a stronger
+                    SOS Connect community.
+
+                </p>
+
+            `;
+
+    }
+
+
+</script>
+
+
+</body>
+
+</html>
