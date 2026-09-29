@@ -1,3 +1,5 @@
+![SOS Connect Homepage](screenshots/sos-connect-homepage.png)
+
 # SOSApp
 
 SOS Help is a Java-based community assistance app that connects people who need help with nearby users willing to assist.
